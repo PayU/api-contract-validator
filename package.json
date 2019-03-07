@@ -1,0 +1,45 @@
+{
+  "name": "chai-api-schema-validator",
+  "version": "1.0.0",
+  "description": "Chai plugin for validating API schemas",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "npm test",
+    "test:coverage": "nyc npm test",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kobik/chai-api-schema-validator.git"
+  },
+  "keywords": [
+    "chai",
+    "plugin",
+    "api"
+  ],
+  "author": "Kobi Carmeli",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kobik/chai-api-schema-validator/issues"
+  },
+  "homepage": "https://github.com/kobik/chai-api-schema-validator#readme",
+  "dependencies": {
+    "ajv": "^6.10.0",
+    "lodash.get": "^4.4.2"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "coveralls": "^3.0.3",
+    "eslint": "^5.15.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "mocha": "^6.0.2",
+    "nock": "^10.0.6",
+    "nyc": "^13.3.0",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7"
+  }
+}
