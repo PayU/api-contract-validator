@@ -5,12 +5,19 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha",
-    "test:coverage": "nyc npm test",
+    "test:coverage": "nyc mocha",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kobik/chai-api-schema-validator.git"
+  },
+  "files": [
+    "lib"
+  ],
+  "directories": {
+    "lib": "lib",
+    "test": "test"
   },
   "keywords": [
     "chai",
@@ -18,7 +25,7 @@
     "api"
   ],
   "author": "Kobi Carmeli",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/kobik/chai-api-schema-validator/issues"
   },
