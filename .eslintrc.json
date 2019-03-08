@@ -1,4 +1,4 @@
-module.exports = {
+{
     "extends": "airbnb-base",
     "env": {
         "node": true,
@@ -8,5 +8,6 @@ module.exports = {
     "rules": {
         "camelcase": "off",
         "no-underscore-dangle": "off",
+        "no-use-before-define": "off"
     }
 }
