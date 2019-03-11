@@ -6,7 +6,6 @@
         "mocha": true
     },
     "rules": {
-        "camelcase": "off",
         "no-underscore-dangle": "off",
         "no-use-before-define": "off"
     }

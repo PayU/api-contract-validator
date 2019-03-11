@@ -1623,26 +1623,104 @@
                       "title": "The 200 Schema",
                       "required": [
                         "description",
-                        "name"
+                        "headers",
+                        "schema"
                       ],
                       "properties": {
                         "description": {
                           "$id": "#/properties/paths/properties//pet/{petId}/properties/get/properties/responses/properties/200/properties/description",
                           "type": "string",
-                          "title": "The animal's Description",
-                          "pattern": "^(.*)$",
-                          "minLength": 6
+                          "title": "The Description Schema",
+                          "default": "",
+                          "examples": [
+                            "successful operation"
+                          ],
+                          "pattern": "^(.*)$"
                         },
-                        "name": {
-                          "$id": "#/properties/paths/properties//pet/{petId}/properties/get/properties/responses/properties/200/properties/name",
-                          "type": "string",
-                          "title": "The pet name"
+                        "headers": {
+                          "$id": "#/properties/paths/properties//pet/{petId}/properties/get/properties/responses/properties/200/properties/headers",
+                          "type": "object",
+                          "title": "The Headers Schema",
+                          "required": [
+                            "X-Rate-Limit",
+                            "X-Expires-After"
+                          ],
+                          "properties": {
+                            "X-Rate-Limit": {
+                              "$id": "#/properties/paths/properties//pet/{petId}/properties/get/properties/responses/properties/200/properties/headers/properties/X-Rate-Limit",
+                              "type": "integer",
+                              "title": "The X-rate-limit Schema",
+                              "minimum": 0
+                            },
+                            "X-Expires-After": {
+                              "$id": "#/properties/paths/properties//pet/{petId}/properties/get/properties/responses/properties/200/properties/headers/properties/X-Expires-After",
+                              "type": "integer",
+                              "title": "The X-expires-after Schema",
+                              "minimum": 0
+                            }
+                          }
                         },
-                        "age": {
-                          "$id": "#/properties/paths/properties//pet/{petId}/properties/get/properties/responses/properties/200/properties/age",
-                          "type": "integer",
-                          "title": "The pet age",
-                          "minimum": 0
+                        "schema": {
+                          "$id": "#/properties/paths/properties//pet/{petId}/properties/get/properties/responses/properties/200/properties/schema",
+                          "type": "object",
+                          "title": "The Schema Schema",
+                          "required": [
+                            "type",
+                            "required",
+                            "properties"
+                          ],
+                          "properties": {
+                            "type": {
+                              "$id": "#/properties/paths/properties//pet/{petId}/properties/get/properties/responses/properties/200/properties/schema/properties/type",
+                              "type": "string",
+                              "title": "The Type Schema",
+                              "pattern": "^(.*)$"
+                            },
+                            "required": {
+                              "$id": "#/properties/paths/properties//pet/{petId}/properties/get/properties/responses/properties/200/properties/schema/properties/required",
+                              "type": "array",
+                              "title": "The Required Schema",
+                              "items": {
+                                "$id": "#/properties/paths/properties//pet/{petId}/properties/get/properties/responses/properties/200/properties/schema/properties/required/items",
+                                "type": "string",
+                                "title": "The Items Schema",
+                                "default": "",
+                                "examples": [
+                                  "name",
+                                  "age"
+                                ],
+                                "pattern": "^(.*)$"
+                              }
+                            },
+                            "properties": {
+                              "$id": "#/properties/paths/properties//pet/{petId}/properties/get/properties/responses/properties/200/properties/schema/properties/properties",
+                              "type": "object",
+                              "title": "The Properties Schema",
+                              "required": [
+                                "name",
+                                "age"
+                              ],
+                              "properties": {
+                                "name": {
+                                  "$id": "#/properties/paths/properties//pet/{petId}/properties/get/properties/responses/properties/200/properties/schema/properties/properties/properties/name",
+                                  "type": "string",
+                                  "minLength": 4
+                                },
+                                "age": {
+                                  "$id": "#/properties/paths/properties//pet/{petId}/properties/get/properties/responses/properties/200/properties/schema/properties/properties/properties/age",
+                                  "type": "integer",
+                                  "title": "The Age Schema",
+                                  "minimum": 0
+                                },
+                                "description": {
+                                  "$id": "#/properties/paths/properties//pet/{petId}/properties/get/properties/responses/properties/200/properties/schema/properties/properties/properties/description",
+                                  "type": "string",
+                                  "title": "The Description Schema",
+                                  "minLength": 5
+                                }
+                              }
+                            }
+                          }
                         }
                       }
                     },

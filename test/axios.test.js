@@ -1,9 +1,9 @@
 const chai = require('chai');
 
-const apiSchema = require('../lib/index');
+const apiSchema = require('../lib/index').chaiPlugin;
 const generateResponse = require('./helpers/response-generator').axios;
 const { schema } = require('./helpers/schemas');
-const { validBody, invalidBody } = require('./helpers/body-generator');
+const { headersObject, bodyObject } = require('./helpers/data');
 
 chai.use(apiSchema);
 const { expect } = chai;
@@ -11,12 +11,10 @@ const { expect } = chai;
 describe('axios', () => {
   describe('When the response object matches the schema', () => {
     it('Should not throw an exception', async () => {
-      const response = await generateResponse(200, {
-        body: validBody,
-        headers: {
-          'content-type': 'application-json',
-          'x-request-id': 'id',
-        },
+      const response = await generateResponse({
+        status: 200,
+        body: bodyObject.valid,
+        headers: headersObject.valid,
       });
 
       expect(response).to.be.successful().and.to.matchApiSchema(schema);
@@ -25,12 +23,10 @@ describe('axios', () => {
 
   describe('When the response object does not match the schema', () => {
     it('Should throw an exception', async () => {
-      const response = await generateResponse(200, {
-        body: invalidBody,
-        headers: {
-          'content-type': 'application-json',
-          'x-request-id': 'id',
-        },
+      const response = await generateResponse({
+        status: 200,
+        body: bodyObject.invalid,
+        headers: headersObject.invalid,
       });
 
       expect(response).to.not.matchApiSchema(schema);

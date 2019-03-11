@@ -9,43 +9,43 @@ const defaults = {
   method: 'get',
 };
 
-module.exports.axios = (code, options = {}) => {
-  mock(code, options);
-
-  return axios({
-    method: options.method || defaults.method,
-    baseURL: defaults.url,
-    url: options.uri || defaults.path,
-    resolveWithFullResponse: true,
-    json: options.body instanceof Object,
-    qs: options.qs,
-    simple: false,
-  });
-};
-
-module.exports.request = (code, options = {}) => {
-  mock(code, options);
+module.exports.request = (options = {}) => {
+  mock(options);
 
   return rp({
     method: options.method || defaults.method,
     baseUrl: defaults.url,
     uri: options.uri || options.path || defaults.path,
     resolveWithFullResponse: true,
-    json: options.body instanceof Object,
+    json: true,
     qs: options.qs,
     simple: false,
   });
 };
 
-module.exports.supertest = (code, options = {}) => {
-  mock(code, options);
+module.exports.axios = (options = {}) => {
+  mock(options);
+
+  return axios({
+    method: options.method || defaults.method,
+    baseURL: defaults.url,
+    url: options.uri || defaults.path,
+    resolveWithFullResponse: true,
+    json: true,
+    qs: options.qs,
+    simple: false,
+  });
+};
+
+module.exports.supertest = (options = {}) => {
+  mock(options);
 
   const method = options.method || defaults.method;
   const uri = options.uri || options.path || defaults.path;
   return request(defaults.url)[method](uri);
 };
 
-function mock(code, { body, headers }) {
+function mock({ status, body, headers }) {
   nock.cleanAll();
-  nock(/./).get(/./).reply(code, body, headers);
+  nock(/./).get(/./).reply(status, body, headers);
 }
