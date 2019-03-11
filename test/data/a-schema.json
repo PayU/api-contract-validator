@@ -1,0 +1,67 @@
+{
+    "type": "object",
+    "required": [
+        "headers",
+        "body"
+    ],
+    "properties": {
+        "headers": {
+            "$id": "#/properties/paths/properties//pet/{petId}/properties/get/properties/responses/properties/200/properties/schema/properties/properties/headers",
+            "type": "object",
+            "title": "The Properties Schema",
+            "required": [
+                "x-request-id",
+                "x-elapsed-time"
+            ],
+            "properties": {
+                "x-request-id": {
+                    "$id": "#/properties/paths/properties//pet/{petId}/properties/get/properties/responses/properties/200/properties/schema/properties/properties/properties/x-request-id",
+                    "type": "string",
+                    "minLength": 4
+                },
+                "x-elapsed-time": {
+                    "$id": "#/properties/paths/properties//pet/{petId}/properties/get/properties/responses/properties/200/properties/schema/properties/properties/properties/x-elapsed-time",
+                    "type": "integer",
+                    "minimum": 0
+                }
+            }
+        },
+        "body": {
+            "$id": "#/properties/paths/properties//pet/{petId}/properties/get/properties/responses/properties/200/properties/schema/properties/properties/body",
+            "type": "object",
+            "title": "The Properties Schema",
+            "required": [
+                "name",
+                "age"
+            ],
+            "properties": {
+                "name": {
+                    "$id": "#/properties/paths/properties//pet/{petId}/properties/get/properties/responses/properties/200/properties/schema/properties/properties/properties/name",
+                    "type": "string",
+                    "minLength": 4
+                },
+                "age": {
+                    "$id": "#/properties/paths/properties//pet/{petId}/properties/get/properties/responses/properties/200/properties/schema/properties/properties/properties/age",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "details": {
+                    "type": "object",
+                    "required": [
+                        "location",
+                        "food"
+                    ],
+                    "properties": {
+                        "location": {
+                            "type": "string"
+                        },
+                        "food": {
+                            "type": "string",
+                            "minLength": 4
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
