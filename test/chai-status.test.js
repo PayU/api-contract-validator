@@ -1,10 +1,7 @@
-const chai = require('chai');
+const { expect } = require('chai');
 
-const apiSchema = require('../lib/index').chaiPlugin;
 const generateResponse = require('./helpers/response-generator').request;
 
-chai.use(apiSchema);
-const { expect } = chai;
 
 describe('Status code matcher', () => {
   it('successful', async () => {

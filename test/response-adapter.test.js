@@ -1,13 +1,12 @@
 /* eslint-disable no-unused-expressions */
-const chai = require('chai');
+const { expect, use } = require('chai');
 const chaiLike = require('chai-like');
 
 const { axios, request, supertest } = require('./helpers/response-generator');
-const { headersObject, bodyObject } = require('./helpers/data');
-const { parseResponse } = require('../lib/adapters/response-adapter');
+const { headersObject, bodyObject } = require('./data/responses');
+const { parseResponse } = require('../lib/helpers/response-adapter');
 
-chai.use(chaiLike);
-const { expect } = chai;
+use(chaiLike);
 
 describe('When calling responseAdapter', () => {
   it('Should map fields correctly from request-promise response', async () => {

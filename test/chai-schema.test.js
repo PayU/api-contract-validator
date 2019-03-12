@@ -1,12 +1,14 @@
-const chai = require('chai');
+const { expect, use } = require('chai');
+const path = require('path');
 
 const apiSchema = require('../lib/index').chaiPlugin;
 const { request } = require('./helpers/response-generator');
-const { schema } = require('./helpers/schemas');
-const { headersObject, bodyObject } = require('./helpers/data');
+const { headersObject, bodyObject } = require('./data/responses');
 
-chai.use(apiSchema);
-const { expect } = chai;
+const schemaPath = path.join(__dirname, 'data', 'schema.json');
+const invalidSchemaPath = '/not/a/path';
+
+use(apiSchema);
 
 describe('chai plugin test', () => {
   it('Response object matches the schema', async () => {
@@ -16,7 +18,7 @@ describe('chai plugin test', () => {
       headers: headersObject.valid,
     });
 
-    expect(response).to.be.successful().and.to.matchApiSchema(schema);
+    expect(response).to.be.successful().and.to.matchApiSchema(schemaPath);
   });
   it('Response object does not match the schema', async () => {
     const response = await request({
@@ -25,34 +27,44 @@ describe('chai plugin test', () => {
       headers: headersObject.valid,
     });
 
-    expect(response).to.be.successful().and.to.not.matchApiSchema(schema);
+    expect(response).to.be.successful().and.to.not.matchApiSchema(schemaPath);
   });
   it('Response object does not contain method', () => {
-    expect(expectationTester({ path: '/pet/123', status: 200, schema }))
+    expect(expectationTester({ path: '/pet/123', status: 200, schemaPath }))
       .to.throw('expected request, axios or supertest response object');
   });
   it('Response object does not contain path', () => {
-    expect(expectationTester({ method: 'get', status: 200, schema }))
+    expect(expectationTester({ method: 'get', status: 200, schemaPath }))
       .to.throw('expected request, axios or supertest response object');
   });
   it('Response object does not contain status', () => {
-    expect(expectationTester({ method: 'get', path: '/pet/123', schema }))
+    expect(expectationTester({ method: 'get', path: '/pet/123', schemaPath }))
       .to.throw('expected request, axios or supertest response object');
   });
-  it('Schema not given', () => {
+  it('Schema path not valid', () => {
     expect(expectationTester({
-      method: 'get', path: '/pet/123', status: 200, schema: undefined,
-    })).to.throw('schema not found for {"path":"/pet/123","method":"get","status":200}');
+      method: 'get', path: '/pet/123', status: 200, schemaPath: invalidSchemaPath,
+    })).to.throw("ENOENT: no such file or directory, open '/not/a/path'");
   });
-  it('Schema is an empty object', () => {
+  it('Schema file is not contain the request path', () => {
     expect(expectationTester({
-      method: 'get', path: '/pet/123', status: 200, schema: {},
-    })).to.throw('schema not found for {"path":"/pet/123","method":"get","status":200}');
+      method: 'get', path: '/predators/123', status: 200, schemaPath,
+    })).to.throw('schema not found for {"path":"/predators/123","method":"get","status":200}');
+  });
+  it('Schema file is not contain the request method', () => {
+    expect(expectationTester({
+      method: 'options', path: '/pet/123', status: 200, schemaPath,
+    })).to.throw('schema not found for {"path":"/pet/123","method":"options","status":200}');
+  });
+  it('Schema file is not contain the response status code', () => {
+    expect(expectationTester({
+      method: 'get', path: '/pet/123', status: 302, schemaPath,
+    })).to.throw('schema not found for {"path":"/pet/123","method":"get","status":302}');
   });
 });
 
 function expectationTester({
-  path, method, status, schema,
+  path, method, status, schemaPath,
 }) {
-  return () => expect({ request: { method, path }, statusCode: status }).to.matchApiSchema(schema);
+  return () => expect({ request: { method, path }, statusCode: status }).to.matchApiSchema(schemaPath);
 }
