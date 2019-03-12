@@ -47,4 +47,12 @@ describe('Status code matcher', () => {
     const response = await generateResponse({ status: 204 });
     expect(response).to.have.status(204);
   });
+  it('Invalid response object', () => {
+    [undefined, null, {}, ''].forEach((value) => {
+      expect(() => expect(value).to.be.gatewayTimeout()).to.throw('expected request, axios or supertest response object');
+    });
+  });
+  it('Response object does not contain status', () => {
+    expect(() => expect({ request: { method: 'get', path: '/pet/123' } }).to.be.gatewayTimeout()).to.throw('expected request, axios or supertest response object');
+  });
 });
