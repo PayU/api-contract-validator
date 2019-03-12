@@ -1,7 +1,7 @@
 {
   "name": "chai-api-schema-validator",
   "version": "1.0.0",
-  "description": "Chai plugin for validating API schemas",
+  "description": "Plugin for validating API schemas from API documentation",
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kobik/chai-api-schema-validator.git"
+    "url": "git+https://github.com/Zooz/api-schema-validator.git"
   },
   "files": [
     "lib"
@@ -22,15 +22,18 @@
   },
   "keywords": [
     "chai",
+    "should",
     "plugin",
-    "api"
+    "api",
+    "openapi",
+    "swagger"
   ],
   "author": "Kobi Carmeli",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/kobik/chai-api-schema-validator/issues"
+    "url": "https://github.com/Zooz/api-schema-validator/issues"
   },
-  "homepage": "https://github.com/kobik/chai-api-schema-validator#readme",
+  "homepage": "https://github.com/Zooz/api-schema-validator#readme",
   "dependencies": {
     "ajv": "^6.10.0",
     "lodash": "^4.17.11"

@@ -1,5 +1,4 @@
-[![Build Status](https://travis-ci.org/kobik/chai-api-schema-validator.svg?branch=master)](https://travis-ci.org/kobik/chai-api-schema-validator)
-[![Coverage Status](https://coveralls.io/repos/github/kobik/chai-api-schema-validator/badge.svg?branch=master)](https://coveralls.io/github/kobik/chai-api-schema-validator?branch=master)
+[![Build Status](https://travis-ci.org/Zooz/api-schema-validator.svg?branch=master)](https://travis-ci.org/Zooz/api-schema-validator)[![Coverage Status](https://coveralls.io/repos/github/zooz/api-schema-validator/badge.svg?branch=master)](https://coveralls.io/github/zooz/api-schema-validator?branch=master)
 
-# chai-api-schema-validator
-Chai plugin for validating API schemas 
+# api-schema-validator
+Plugin for validating API schemas from API documentation
