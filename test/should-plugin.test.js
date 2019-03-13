@@ -28,10 +28,6 @@ describe('Should.js plugin schema test', () => {
 
     should(response).not.matchApiSchema(schemaPath);
   });
-  it('Response object does not contain method', () => {
-    should(expectationTester({ path: '/pet/123', status: 200, schemaPath }))
-      .throw('expected request, axios or supertest response object');
-  });
   it('successful', async () => {
     const response = await request({ status: 200 });
     should(response).be.successful();
@@ -82,11 +78,3 @@ describe('Should.js plugin schema test', () => {
     should(() => should({ request: { method: 'get', path: '/pet/123' } }).be.gatewayTimeout()).throw('expected request, axios or supertest response object');
   });
 });
-
-function expectationTester({
-  path, method, status, schemaPath,
-}) {
-  return function matchApiSchema() {
-    should({ request: { method, path }, statusCode: status }).matchApiSchema(schemaPath);
-  };
-}

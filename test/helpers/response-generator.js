@@ -18,7 +18,6 @@ module.exports.request = (options = {}) => {
     uri: options.uri || options.path || defaults.path,
     resolveWithFullResponse: true,
     json: true,
-    qs: options.qs,
     simple: false,
   });
 };
@@ -32,7 +31,6 @@ module.exports.axios = (options = {}) => {
     url: options.uri || defaults.path,
     resolveWithFullResponse: true,
     json: true,
-    qs: options.qs,
     simple: false,
   });
 };
