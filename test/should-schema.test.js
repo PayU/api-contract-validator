@@ -3,19 +3,18 @@ const path = require('path');
 
 const apiSchema = require('../lib/index').shouldPlugin;
 const { request } = require('./helpers/response-generator');
-const { headersObject, bodyObject } = require('./data/responses');
+const responses = require('./data/responses');
 
-const schemaPath = path.join(__dirname, 'data', 'schema.json');
-const invalidSchemaPath = '/not/a/path';
+const schemaPath = path.join(__dirname, 'data', 'schema.yaml');
 
 apiSchema(should.Assertion);
 
-describe('chai plugin test', () => {
+describe('Should.js plugin schema test', () => {
   it('Response object matches the schema', async () => {
     const response = await request({
       status: 200,
-      body: bodyObject.valid,
-      headers: headersObject.valid,
+      body: responses.body.valid.value,
+      headers: responses.headers.valid.value,
     });
 
     should(response).be.successful().and.matchApiSchema(schemaPath);
@@ -23,8 +22,8 @@ describe('chai plugin test', () => {
   it('Response object does not match the schema', async () => {
     const response = await request({
       status: 200,
-      body: bodyObject.invalid,
-      headers: headersObject.valid,
+      body: responses.body.invalid.value,
+      headers: responses.headers.valid.value,
     });
 
     should(response).not.matchApiSchema(schemaPath);
@@ -33,38 +32,61 @@ describe('chai plugin test', () => {
     should(expectationTester({ path: '/pet/123', status: 200, schemaPath }))
       .throw('expected request, axios or supertest response object');
   });
-  it('Response object does not contain path', () => {
-    should(expectationTester({ method: 'get', status: 200, schemaPath }))
-      .throw('expected request, axios or supertest response object');
+  it('successful', async () => {
+    const response = await request({ status: 200 });
+    should(response).be.successful();
   });
-  it('Response object does not contain status', () => {
-    should(expectationTester({ method: 'get', path: '/pet/123', schemaPath }))
-      .throw('expected request, axios or supertest response object');
+  it('created', async () => {
+    const response = await request({ status: 201 });
+    should(response).be.created();
   });
-  it('Schema path not valid', () => {
-    should(expectationTester({
-      method: 'get', path: '/pet/123', status: 200, schemaPath: invalidSchemaPath,
-    })).throw("ENOENT: no such file or directory, open '/not/a/path'");
+  it('badRequest', async () => {
+    const response = await request({ status: 400 });
+    should(response).be.badRequest();
   });
-  it('Schema file is not contain the request path', () => {
-    should(expectationTester({
-      method: 'get', path: '/predators/123', status: 200, schemaPath,
-    })).throw('schema not found for {"path":"/predators/123","method":"get","status":200}');
+  it('unauthorized', async () => {
+    const response = await request({ status: 401 });
+    should(response).be.unauthorized();
   });
-  it('Schema file is not contain the request method', () => {
-    should(expectationTester({
-      method: 'options', path: '/pet/123', status: 200, schemaPath,
-    })).throw('schema not found for {"path":"/pet/123","method":"options","status":200}');
+  it('forbidden', async () => {
+    const response = await request({ status: 403 });
+    should(response).be.forbidden();
   });
-  it('Schema file is not contain the response status code', () => {
-    should(expectationTester({
-      method: 'get', path: '/pet/123', status: 302, schemaPath,
-    })).throw('schema not found for {"path":"/pet/123","method":"get","status":302}');
+  it('notFound', async () => {
+    const response = await request({ status: 404 });
+    should(response).be.notFound();
+  });
+  it('serverError', async () => {
+    const response = await request({ status: 500 });
+    should(response).be.serverError();
+  });
+  it('serviceUnavailable', async () => {
+    const response = await request({ status: 503 });
+    should(response).be.serviceUnavailable();
+  });
+  it('gatewayTimeout', async () => {
+    const response = await request({ status: 504 });
+    should(response).be.gatewayTimeout();
+  });
+  it('custom code', async () => {
+    const response = await request({ status: 204 });
+    should(response).have.status(204);
+  });
+  it('Invalid response object', () => {
+    should(() => should(undefined).be.gatewayTimeout()).throw('expected request, axios or supertest response object');
+    should(() => should(null).be.gatewayTimeout()).throw('expected request, axios or supertest response object');
+    should(() => should({}).be.gatewayTimeout()).throw('expected request, axios or supertest response object');
+    should(() => should('').be.gatewayTimeout()).throw('expected request, axios or supertest response object');
+  });
+  it('No status code in response', () => {
+    should(() => should({ request: { method: 'get', path: '/pet/123' } }).be.gatewayTimeout()).throw('expected request, axios or supertest response object');
   });
 });
 
 function expectationTester({
   path, method, status, schemaPath,
 }) {
-  return () => should({ request: { method, path }, statusCode: status }).matchApiSchema(schemaPath);
+  return function matchApiSchema() {
+    should({ request: { method, path }, statusCode: status }).matchApiSchema(schemaPath);
+  };
 }

@@ -1,10 +1,10 @@
 {
-  "name": "chai-api-schema-validator",
+  "name": "api-schema-validator",
   "version": "1.0.0",
   "description": "Plugin for validating API schemas from API documentation",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "snyk test && mocha",
     "test:coverage": "nyc mocha",
     "lint": "eslint lib",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
@@ -26,7 +26,10 @@
     "plugin",
     "api",
     "openapi",
-    "swagger"
+    "swagger",
+    "validator",
+    "rest",
+    "restapi"
   ],
   "author": "Kobi Carmeli",
   "license": "Apache-2.0",
@@ -35,8 +38,8 @@
   },
   "homepage": "https://github.com/Zooz/api-schema-validator#readme",
   "dependencies": {
-    "ajv": "^6.10.0",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "synchronized-promise": "0.0.4"
   },
   "devDependencies": {
     "axios": "^0.18.0",
@@ -55,7 +58,8 @@
     "request": "^2.88.0",
     "request-promise-native": "^1.0.7",
     "should": "^13.2.3",
-    "supertest": "^4.0.0"
+    "supertest": "^4.0.0",
+    "snyk": "^1.136.2"
   },
   "nyc": {
     "check-coverage": true,

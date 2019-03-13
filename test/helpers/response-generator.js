@@ -4,7 +4,7 @@ const axios = require('axios');
 const request = require('supertest');
 
 const defaults = {
-  path: '/pet/123',
+  path: '/v2/pet/123',
   url: 'http://www.google.com',
   method: 'get',
 };
