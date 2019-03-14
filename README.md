@@ -7,7 +7,8 @@ Plugin for validating API schemas from API documentation
 
 ## What it does?
 Validating that your application responses are compatible with its API documentation should be never underestimated.
-And testing your Restful application is standing to its API documentation was never easier. Just by pointing to your Swagger or OpenAPIv3 file and adding one line to your integration tests, this validator can tell you whether or not your application stands to its contract.
+
+Testing your Restful application is standing to its API documentation was never easier. Just by pointing to your Swagger 2.0 or OpenAPIv 3.0 file and adding one line to your integration test, this validator can tell you whether or not your application stands to its contract.
 
 ## How to use?
 ***Chai.js***
@@ -38,13 +39,46 @@ it('GET /pets/123', async () => {
 ```
 
 ## Supported request libraries
-- request-promise
-- axios
+- request-promise*
+- axios*
 - supertest
 - more to come
+
+\* Prerequisites:
+- resolveWithFullResponse: true
+- simple: false
 
 ## Supported assertion libraries
 - chai.js
 - should.js
 - more to come
+
 The validation function itself is also exposed which allows this library to be agnostic
+
+
+***Should.js***
+```js
+const rp = require('request-promise');
+const matchApiSchema = require('api-schema-validator');
+const path = require('path');
+const should = require('should');
+
+const myApiDocPath = path.join(__dirname, 'myApp.yaml');
+
+// add as should plugin
+matchApiSchema(should.Assertion);
+
+// we need to complete response object including the status code
+const myApp = rp.defaults({
+    baseUrl: 'http://www.localhost:8000',
+    resolveWithFullResponse: true,
+    simple: false,
+    json: true
+})
+
+it('GET /pets/123', async () => {
+    const response = await myApp.get('/pet/123');
+
+    should(response).be.successful().and.matchApiSchema(myApiDocPath);
+})
+```
