@@ -26,7 +26,7 @@ describe('Chai.js plugin schema test', () => {
       headers: responses.headers.valid.value,
     });
 
-    expect(response).to.be.successful().and.to.not.matchApiSchema(schemaPath);
+    expect(response).to.not.matchApiSchema(schemaPath);
   });
   it('successful', async () => {
     const response = await request({ status: 200 });
