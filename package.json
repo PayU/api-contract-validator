@@ -4,7 +4,7 @@
   "description": "Plugin for validating API schemas from API documentation",
   "main": "lib/index.js",
   "scripts": {
-    "test": "snyk test && mocha",
+    "test": "mocha",
     "test:coverage": "nyc npm test",
     "lint": "eslint lib",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
