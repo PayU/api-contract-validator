@@ -45,22 +45,20 @@ const myApp = rp.defaults({
 })
 
 it('GET /pets/123', async () => {
+    // testing 200
     const response = await myApp.get('/pet/123');
-
     expect(response).to.be.successful().and.to.matchApiSchema(myApiDocPath);
-})
 
-it('expect 400 on invalid call', async () => {
-    // using try-catch
+    // testing using request-promise `simple: false` flag
+    const response = await myApp.get('/pet/123', { simple: false });
+    expect(response).to.be.badRequest().and.to.matchApiSchema(myApiDocPath);
+
+    // testing 400 using try-catch
     try {
         const response = await myApp.get('/pet/123');
     } catch (error) {
         expect(error.response).to.be.badRequest().and.to.matchApiSchema(myApiDocPath);
     }
-
-    // using request-promise `simple: false` flag
-    const response = await myApp.get('/pet/123', { simple: false });
-    expect(response).to.be.badRequest().and.to.matchApiSchema(myApiDocPath);
 })
 ```
 
@@ -70,10 +68,7 @@ it('expect 400 on invalid call', async () => {
 - axios
 - more to come
 
-*\* Prerequisites for request-promise:*
-```js
-{ resolveWithFullResponse: true }
-```
+*\* When using request-promise `resolveWithFullResponse:true` must be added to the options, in order to properly extract the request details*
 
 ## Supported assertion libraries
 - chai.js
