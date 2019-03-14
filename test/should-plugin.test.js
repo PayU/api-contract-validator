@@ -29,43 +29,43 @@ describe('Should.js plugin schema test', () => {
     should(response).not.matchApiSchema(schemaPath);
   });
   it('successful', async () => {
-    const response = await request({ status: 200 });
+    const response = await request({ status: 200, simple: false });
     should(response).be.successful();
   });
   it('created', async () => {
-    const response = await request({ status: 201 });
+    const response = await request({ status: 201, simple: false });
     should(response).be.created();
   });
   it('badRequest', async () => {
-    const response = await request({ status: 400 });
+    const response = await request({ status: 400, simple: false });
     should(response).be.badRequest();
   });
   it('unauthorized', async () => {
-    const response = await request({ status: 401 });
+    const response = await request({ status: 401, simple: false });
     should(response).be.unauthorized();
   });
   it('forbidden', async () => {
-    const response = await request({ status: 403 });
+    const response = await request({ status: 403, simple: false });
     should(response).be.forbidden();
   });
   it('notFound', async () => {
-    const response = await request({ status: 404 });
+    const response = await request({ status: 404, simple: false });
     should(response).be.notFound();
   });
   it('serverError', async () => {
-    const response = await request({ status: 500 });
+    const response = await request({ status: 500, simple: false });
     should(response).be.serverError();
   });
   it('serviceUnavailable', async () => {
-    const response = await request({ status: 503 });
+    const response = await request({ status: 503, simple: false });
     should(response).be.serviceUnavailable();
   });
   it('gatewayTimeout', async () => {
-    const response = await request({ status: 504 });
+    const response = await request({ status: 504, simple: false });
     should(response).be.gatewayTimeout();
   });
   it('custom code', async () => {
-    const response = await request({ status: 204 });
+    const response = await request({ status: 204, simple: false });
     should(response).have.status(204);
   });
   it('Invalid response object', () => {

@@ -17,8 +17,8 @@ module.exports.request = (options = {}) => {
     baseUrl: defaults.url,
     uri: options.uri || options.path || defaults.path,
     resolveWithFullResponse: true,
+    simple: options.simple,
     json: true,
-    simple: false,
   });
 };
 
@@ -29,9 +29,7 @@ module.exports.axios = (options = {}) => {
     method: options.method || defaults.method,
     baseURL: defaults.url,
     url: options.uri || defaults.path,
-    resolveWithFullResponse: true,
     json: true,
-    simple: false,
   });
 };
 

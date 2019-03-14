@@ -19,6 +19,18 @@ describe('responseAdapter', () => {
     expect(parseResponse(rpResponse)).to.be.like(expectedResponse);
   });
 
+  it('request-promise non-2xx response', async () => {
+    try {
+      await request({
+        status: 400,
+        body: responses.body.valid.value,
+        headers: responses.headers.valid.value,
+      });
+    } catch (error) {
+      expect(parseResponse(error.response)).to.be.like(expected400Response);
+    }
+  });
+
   it('axios response', async () => {
     const axiosResponse = await axios({
       status: 200,
@@ -28,6 +40,19 @@ describe('responseAdapter', () => {
 
     expect(parseResponse(axiosResponse)).to.be.like(expectedResponse);
   });
+
+  it('axios non-2xx response', async () => {
+    try {
+      await axios({
+        status: 400,
+        body: responses.body.valid.value,
+        headers: responses.headers.valid.value,
+      });
+    } catch (error) {
+      expect(parseResponse(error.response)).to.be.like(expected400Response);
+    }
+  });
+
 
   it('supertest response', async () => {
     const stResponse = await supertest({
@@ -55,6 +80,17 @@ const expectedResponse = {
   },
   response: {
     status: 200,
+    body: responses.body.valid.value,
+  },
+};
+
+const expected400Response = {
+  request: {
+    method: 'get',
+    path: '/v2/pet/123',
+  },
+  response: {
+    status: 400,
     body: responses.body.valid.value,
   },
 };
