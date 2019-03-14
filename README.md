@@ -6,11 +6,25 @@
 Plugin for validating API schemas from API documentation
 
 ## What it does?
-Validating that your application responses are compatible with its API documentation should be never underestimated.
+Validating that your application responses are compatible with its 
+API documentation should be never underestimated.
 
-Testing your Restful application is standing to its API documentation was never easier. Just by pointing to your Swagger 2.0 or OpenAPIv 3.0 file and adding one line to your integration test, this validator can tell you whether or not your application stands to its contract.
+Testing your Restful application is standing to its API documentation was never easier. 
+Just by pointing to your Swagger 2.0 or OpenAPIv 3.0 file and adding one line to your integration test,
+ this validator can tell you whether or not your application stands to its contract.
+
+## How things are done?
+api-schema-validator prepares the json-schema according to the given API documentation file 
+and whenever matchApiSchema is called, it automatically extracts the method, path and status code 
+from the response object. Using the this data it's applying the correct validation on the 
+response object, validating both the response headers and body.
 
 ## How to use?
+###installation###
+```bash
+> npm i --save-dev api-schema-validator
+```
+
 ***Chai.js***
 ```js
 const rp = require('request-promise');
@@ -27,7 +41,6 @@ use(matchApiSchema);
 const myApp = rp.defaults({
     baseUrl: 'http://www.localhost:8000',
     resolveWithFullResponse: true,
-    simple: false,
     json: true
 })
 
@@ -36,17 +49,31 @@ it('GET /pets/123', async () => {
 
     expect(response).to.be.successful().and.to.matchApiSchema(myApiDocPath);
 })
+
+it('expect 400 on invalid call', async () => {
+    // using try-catch
+    try {
+        const response = await myApp.get('/pet/123');
+    } catch (error) {
+        expect(error.response).to.be.badRequest().and.to.matchApiSchema(myApiDocPath);
+    }
+
+    // using request-promise `simple: false` flag
+    const response = await myApp.get('/pet/123', { simple: false });
+    expect(response).to.be.badRequest().and.to.matchApiSchema(myApiDocPath);
+})
 ```
 
 ## Supported request libraries
-- request-promise*
-- axios*
 - supertest
+- request-promise*
+- axios
 - more to come
 
-\* Prerequisites:
-- resolveWithFullResponse: true
-- simple: false
+*\* Prerequisites for request-promise:*
+```js
+{ resolveWithFullResponse: true }
+```
 
 ## Supported assertion libraries
 - chai.js
