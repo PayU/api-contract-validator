@@ -1,5 +1,5 @@
 {
-  "name": "api-schema-validator",
+  "name": "api-contract-validator",
   "version": "1.0.0",
   "description": "Plugin for validating API schemas from API documentation",
   "main": "lib/index.js",
