@@ -41,17 +41,17 @@ const myApp = rp.defaults({
 it('GET /pets/123', async () => {
     // testing 200
     const response = await myApp.get('/pet/123');
-    expect(response).to.be.successful().and.to.matchApiSchema();
+    expect(response).to.have.status(200).and.to.matchApiSchema();
 
     // testing using request-promise `simple: false` flag
     const response = await myApp.get('/pet/123', { simple: false });
-    expect(response).to.be.a.badRequest().and.to.matchApiSchema();
+    expect(response).to.have.status(400).and.to.matchApiSchema();
 
     // testing non-2xx status using try-catch
     try {
         const response = await myApp.get('/pet/123');
     } catch (error) {
-        expect(error.response).to.be.a.badRequest().and.to.matchApiSchema();
+        expect(error.response).to.have.status(400).and.to.matchApiSchema();
     }
 })
 ```
@@ -66,7 +66,7 @@ matchApiSchema(should.Assertion, { apiDefinitionsPath });
 it('GET /pets/123', async () => {
     const response = await myApp.get('/pet/123');
 
-    should(response).be.successful().and.matchApiSchema();
+    should(response).have.status(200).and.matchApiSchema();
 })
 ```
 
