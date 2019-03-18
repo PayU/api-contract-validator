@@ -1,4 +1,4 @@
-![npm](https://img.shields.io/npm/v/api-contract-validator.svg)
+[![npm](https://img.shields.io/npm/v/api-contract-validator.svg)](https://www.npmjs.com/package/api-contract-validator)
 [![Build Status](https://travis-ci.org/Zooz/api-contract-validator.svg?branch=master)](https://travis-ci.org/Zooz/api-contract-validator)
 [![Coverage Status](https://coveralls.io/repos/github/Zooz/api-contract-validator/badge.svg?branch=master)](https://coveralls.io/github/Zooz/api-contract-validator?branch=master)
 [![Known Vulnerabilities](https://snyk.io/test/github/Zooz/api-contract-validator/badge.svg?targetFile=package.json)](https://snyk.io/test/github/Zooz/api-contract-validator?targetFile=package.json)
