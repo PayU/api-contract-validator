@@ -1,13 +1,13 @@
 const should = require('should');
 const path = require('path');
 
-const apiSchema = require('../lib/index').shouldPlugin;
+const apiSchema = require('../lib/index');
 const { request } = require('./helpers/response-generator');
 const responses = require('./data/responses');
 
-const schemaPath = path.join(__dirname, 'data', 'schema.yaml');
+const apiDefinitionsPath = path.join(__dirname, 'data', 'schema.yaml');
 
-apiSchema(should.Assertion);
+apiSchema.shouldPlugin(should.Assertion, { apiDefinitionsPath });
 
 describe('Should.js plugin schema test', () => {
   it('Response object matches the schema', async () => {
@@ -17,7 +17,7 @@ describe('Should.js plugin schema test', () => {
       headers: responses.headers.valid.value,
     });
 
-    should(response).be.successful().and.matchApiSchema(schemaPath);
+    should(response).be.successful().and.matchApiSchema();
   });
   it('Response object does not match the schema', async () => {
     const response = await request({
@@ -26,7 +26,7 @@ describe('Should.js plugin schema test', () => {
       headers: responses.headers.valid.value,
     });
 
-    should(response).not.matchApiSchema(schemaPath);
+    should(response).not.matchApiSchema();
   });
   it('successful', async () => {
     const response = await request({ status: 200, simple: false });
@@ -69,12 +69,16 @@ describe('Should.js plugin schema test', () => {
     should(response).have.status(204);
   });
   it('Invalid response object', () => {
-    should(() => should(undefined).be.gatewayTimeout()).throw('expected request, axios or supertest response object');
-    should(() => should(null).be.gatewayTimeout()).throw('expected request, axios or supertest response object');
-    should(() => should({}).be.gatewayTimeout()).throw('expected request, axios or supertest response object');
-    should(() => should('').be.gatewayTimeout()).throw('expected request, axios or supertest response object');
+    const error = 'failed to extract response details';
+    should(() => should(undefined).be.gatewayTimeout()).throw(error);
+    should(() => should(null).be.gatewayTimeout()).throw(error);
   });
   it('No status code in response', () => {
-    should(() => should({ request: { method: 'get', path: '/pet/123' } }).be.gatewayTimeout()).throw('expected request, axios or supertest response object');
+    should(() => should({ request: { method: 'get', path: '/pet/123' } }).be.gatewayTimeout()).throw("required properties for validating schema are missing: 'status'");
+  });
+  it('apiDefinitionsPath is missing', () => {
+    const error = "'apiDefinitionsPath' is required";
+    should(() => apiSchema.shouldPlugin(should.Assertion)).throw(error);
+    should(() => apiSchema.shouldPlugin(should.Assertion, { apiDefinitionsPath: undefined })).throw(error);
   });
 });

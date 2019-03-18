@@ -1,13 +1,13 @@
 const { expect, use } = require('chai');
 const path = require('path');
 
-const apiSchema = require('../lib/index').chaiPlugin;
+const apiSchema = require('../lib/index');
 const { request } = require('./helpers/response-generator');
 const responses = require('./data/responses');
 
-const schemaPath = path.join(__dirname, 'data', 'schema.yaml');
+const apiDefinitionsPath = path.join(__dirname, 'data', 'schema.yaml');
 
-use(apiSchema);
+use(apiSchema.chaiPlugin({ apiDefinitionsPath }));
 
 describe('Chai.js plugin schema test', () => {
   it('Response object matches the schema', async () => {
@@ -17,7 +17,7 @@ describe('Chai.js plugin schema test', () => {
       headers: responses.headers.valid.value,
     });
 
-    expect(response).to.matchApiSchema(schemaPath);
+    expect(response).to.matchApiSchema();
   });
   it('Response body does not match the schema', async () => {
     const response = await request({
@@ -26,7 +26,7 @@ describe('Chai.js plugin schema test', () => {
       headers: responses.headers.valid.value,
     });
 
-    expect(response).to.not.matchApiSchema(schemaPath);
+    expect(response).to.not.matchApiSchema();
   });
   it('successful', async () => {
     const response = await request({ status: 200, simple: false });
@@ -68,13 +68,12 @@ describe('Chai.js plugin schema test', () => {
     const response = await request({ status: 204, simple: false });
     expect(response).to.have.status(204);
   });
-  it('Invalid response object', () => {
-    expect(() => expect(undefined).be.gatewayTimeout()).to.throw('expected request, axios or supertest response object');
-    expect(() => expect(null).be.gatewayTimeout()).to.throw('expected request, axios or supertest response object');
-    expect(() => expect({}).be.gatewayTimeout()).to.throw('expected request, axios or supertest response object');
-    expect(() => expect('').be.gatewayTimeout()).to.throw('expected request, axios or supertest response object');
-  });
   it('No status code in response', () => {
-    expect(() => expect({ request: { method: 'get', path: '/pet/123' } }).to.be.gatewayTimeout()).to.throw('expected request, axios or supertest response object');
+    expect(() => expect({ request: { method: 'get', path: '/pet/123' } }).to.be.gatewayTimeout()).to.throw("required properties for validating schema are missing: 'status'");
+  });
+  it('apiDefinitionsPath is missing', () => {
+    const error = "'apiDefinitionsPath' is required";
+    expect(() => apiSchema.chaiPlugin()).to.throw(error);
+    expect(() => apiSchema.chaiPlugin({ apiDefinitionsPath: undefined })).to.throw(error);
   });
 });

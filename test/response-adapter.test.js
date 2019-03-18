@@ -10,13 +10,13 @@ use(chaiLike);
 
 describe('responseAdapter', () => {
   it('request-promise response', async () => {
-    const rpResponse = await request({
+    const response = await request({
       status: 200,
       body: responses.body.valid.value,
       headers: responses.headers.valid.value,
     });
 
-    expect(parseResponse(rpResponse)).to.be.like(expectedResponse);
+    expect(parseResponse(response)).to.be.like(expectedResponse);
   });
 
   it('request-promise non-2xx response', async () => {
@@ -32,13 +32,13 @@ describe('responseAdapter', () => {
   });
 
   it('axios response', async () => {
-    const axiosResponse = await axios({
+    const response = await axios({
       status: 200,
       body: responses.body.valid.value,
       headers: responses.headers.valid.value,
     });
 
-    expect(parseResponse(axiosResponse)).to.be.like(expectedResponse);
+    expect(parseResponse(response)).to.be.like(expectedResponse);
   });
 
   it('axios non-2xx response', async () => {
@@ -55,21 +55,35 @@ describe('responseAdapter', () => {
 
 
   it('supertest response', async () => {
-    const stResponse = await supertest({
+    const response = await supertest({
       status: 200,
       body: responses.body.valid.value,
       headers: responses.headers.valid.value,
     });
 
-    expect(parseResponse(stResponse)).to.be.like(expectedResponse);
+    expect(parseResponse(response)).to.be.like(expectedResponse);
+  });
+
+  it('general object', async () => {
+    expect(parseResponse({
+      method: 'get',
+      status: 200,
+      path: '/v2/pet/123',
+      body: responses.body.valid.value,
+      headers: responses.headers.valid.value,
+    })).to.be.like(expectedResponse);
+    expect(parseResponse({
+      method: 'get',
+      statusCode: 200,
+      path: '/v2/pet/123',
+      body: responses.body.valid.value,
+      headers: responses.headers.valid.value,
+    })).to.be.like(expectedResponse);
   });
 
   it('invalid response', async () => {
-    expect(parseResponse('')).to.to.be.undefined;
-    expect(parseResponse({})).to.to.be.undefined;
     expect(parseResponse(undefined)).to.to.be.undefined;
     expect(parseResponse(null)).to.to.be.undefined;
-    expect(parseResponse([])).to.to.be.undefined;
   });
 });
 
@@ -81,6 +95,7 @@ const expectedResponse = {
   response: {
     status: 200,
     body: responses.body.valid.value,
+    headers: responses.headers.valid.value,
   },
 };
 

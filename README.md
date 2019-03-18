@@ -28,14 +28,13 @@ response object, validating both the response headers and body.
 ***Chai.js***
 ```js
 const rp = require('request-promise');
-const matchApiSchema = require('api-schema-validator');
+const matchApiSchema = require('api-contract-validator').chaiPlugin;
 const path = require('path');
 const { expect, use } = require('chai');
 
-const myApiDocPath = path.join(__dirname, 'myApp.yaml');
-
 // add as chai plugin
-use(matchApiSchema);
+const apiDefinitionsPath = path.join(__dirname, 'myApp.yaml');
+use(matchApiSchema({ apiDefinitionsPath }));
 
 // we need to complete response object including the status code
 const myApp = rp.defaults({
@@ -47,17 +46,17 @@ const myApp = rp.defaults({
 it('GET /pets/123', async () => {
     // testing 200
     const response = await myApp.get('/pet/123');
-    expect(response).to.be.successful().and.to.matchApiSchema(myApiDocPath);
+    expect(response).to.be.successful().and.to.matchApiSchema();
 
     // testing using request-promise `simple: false` flag
     const response = await myApp.get('/pet/123', { simple: false });
-    expect(response).to.be.badRequest().and.to.matchApiSchema(myApiDocPath);
+    expect(response).to.be.a.badRequest().and.to.matchApiSchema();
 
-    // testing 400 using try-catch
+    // testing non-2xx status using try-catch
     try {
         const response = await myApp.get('/pet/123');
     } catch (error) {
-        expect(error.response).to.be.badRequest().and.to.matchApiSchema(myApiDocPath);
+        expect(error.response).to.be.a.badRequest().and.to.matchApiSchema();
     }
 })
 ```
@@ -68,7 +67,7 @@ it('GET /pets/123', async () => {
 - axios
 - more to come
 
-*\* When using request-promise `resolveWithFullResponse:true` must be added to the options, in order to properly extract the request details*
+*\* When using request-promise `resolveWithFullResponse:true` must be added to the request options, in order to properly extract the request details*
 
 ## Supported assertion libraries
 - chai.js
@@ -80,27 +79,14 @@ The validation function itself is also exposed which allows this library to be a
 
 ***Should.js***
 ```js
-const rp = require('request-promise');
-const matchApiSchema = require('api-schema-validator');
-const path = require('path');
-const should = require('should');
-
-const myApiDocPath = path.join(__dirname, 'myApp.yaml');
+const matchApiSchema = require('api-contract-validator').shouldPlugin;
 
 // add as should plugin
-matchApiSchema(should.Assertion);
-
-// we need to complete response object including the status code
-const myApp = rp.defaults({
-    baseUrl: 'http://www.localhost:8000',
-    resolveWithFullResponse: true,
-    simple: false,
-    json: true
-})
+matchApiSchema(should.Assertion, { apiDefinitionsPath });
 
 it('GET /pets/123', async () => {
     const response = await myApp.get('/pet/123');
 
-    should(response).be.successful().and.matchApiSchema(myApiDocPath);
+    should(response).be.successful().and.matchApiSchema();
 })
 ```
