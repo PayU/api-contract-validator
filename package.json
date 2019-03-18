@@ -29,7 +29,8 @@
     "swagger",
     "validator",
     "rest",
-    "restapi"
+    "restapi",
+    "assert"
   ],
   "author": "Kobi Carmeli",
   "license": "Apache-2.0",
