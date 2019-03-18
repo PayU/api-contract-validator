@@ -193,8 +193,9 @@ paths:
                 type: "string"
                 minLength: 4
               age:
-                type: "integer"
+                type: "number"
                 minimum: 0
+                format: double
               description:
                 type: "string"
         400:
