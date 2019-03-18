@@ -107,6 +107,15 @@ describe('Schema validation', () => {
     })).to.throw('schema not found for {"path":"/pet/123","method":"get","status":302}');
   });
 
+  it('apiDefinitionsPath is missing', () => {
+    expect(() => schemaValidator()).to.throw("'apiDefinitionsPath' is required");
+  });
+
+  it('API definitions file does not contain the response status code', () => {
+    expect(() => schemaValidator(undefined, { apiDefinitionsPath }))
+      .to.throw('failed to extract response details');
+  });
+
   it('API definitions file does not contain the request path', () => {
     expect(expectationTester({
       method: 'get', path: '/pet/123/test', status: 200, apiDefinitionsPath,
