@@ -41,6 +41,8 @@ module.exports.supertest = (options = {}) => {
   return request(defaults.url)[method](uri);
 };
 
+module.exports.mock = mock;
+
 function mock({ status, body, headers }) {
   nock.cleanAll();
   nock(/./).get(/./).reply(status, body, headers);
