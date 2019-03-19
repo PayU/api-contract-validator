@@ -7,7 +7,7 @@ const responses = require('./data/responses');
 
 const apiDefinitionsPath = path.join(__dirname, 'data', 'schema.yaml');
 
-apiSchema.shouldPlugin(should.Assertion, { apiDefinitionsPath });
+apiSchema.shouldPlugin(should, { apiDefinitionsPath });
 
 describe('Should.js plugin schema test', () => {
   it('Response object matches the schema', async () => {
@@ -80,5 +80,8 @@ describe('Should.js plugin schema test', () => {
     const error = "'apiDefinitionsPath' is required";
     should(() => apiSchema.shouldPlugin(should.Assertion)).throw(error);
     should(() => apiSchema.shouldPlugin(should.Assertion, { apiDefinitionsPath: undefined })).throw(error);
+  });
+  it('apiDefinitionsPath is missing', () => {
+    should(() => apiSchema.shouldPlugin(should.Assertion, { apiDefinitionsPath })).not.throw();
   });
 });

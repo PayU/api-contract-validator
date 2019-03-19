@@ -40,7 +40,7 @@ const matchApiSchema = require('api-contract-validator').shouldPlugin;
 
 const apiDefinitionsPath = path.join(__dirname, 'myApp.yaml'); // API definitions path
 
-matchApiSchema(should.Assertion, { apiDefinitionsPath }); // add as should plugin
+matchApiSchema(should, { apiDefinitionsPath }); // add as should plugin
 
 it('GET /pets/123', async () => {
     const response = await request.get('/pet/123');
