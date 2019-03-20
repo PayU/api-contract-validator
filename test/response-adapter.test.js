@@ -19,6 +19,17 @@ describe('responseAdapter', () => {
     expect(parseResponse(response)).to.be.like(expectedResponse);
   });
 
+  it('request-promise response with query string', async () => {
+    const response = await request({
+      status: 200,
+      url: 'http://www.google.com/v2/pet/123?querty=value',
+      body: responses.body.valid.value,
+      headers: responses.headers.valid.value,
+    });
+
+    expect(parseResponse(response)).to.be.like(expectedResponse);
+  });
+
   it('request-promise non-2xx response', async () => {
     try {
       await request({
