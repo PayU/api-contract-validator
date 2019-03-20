@@ -19,7 +19,7 @@ describe('responseAdapter', () => {
     expect(parseResponse(response)).to.be.like(expectedResponse);
   });
 
-  it('request-promise response with query string', async () => {
+  it('request-promise request with query string', async () => {
     const response = await request({
       status: 200,
       url: 'http://www.google.com/v2/pet/123?querty=value',
@@ -52,6 +52,17 @@ describe('responseAdapter', () => {
     expect(parseResponse(response)).to.be.like(expectedResponse);
   });
 
+  it('axios request with query string', async () => {
+    const response = await axios({
+      status: 200,
+      url: 'http://www.google.com/v2/pet/123?querty=value',
+      body: responses.body.valid.value,
+      headers: responses.headers.valid.value,
+    });
+
+    expect(parseResponse(response)).to.be.like(expectedResponse);
+  });
+
   it('axios non-2xx response', async () => {
     try {
       await axios({
@@ -68,6 +79,17 @@ describe('responseAdapter', () => {
   it('supertest response', async () => {
     const response = await supertest({
       status: 200,
+      body: responses.body.valid.value,
+      headers: responses.headers.valid.value,
+    });
+
+    expect(parseResponse(response)).to.be.like(expectedResponse);
+  });
+
+  it('supertest request with query string', async () => {
+    const response = await supertest({
+      status: 200,
+      url: 'http://www.google.com/v2/pet/123?querty=value',
       body: responses.body.valid.value,
       headers: responses.headers.valid.value,
     });
