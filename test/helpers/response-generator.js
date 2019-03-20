@@ -27,7 +27,7 @@ module.exports.axios = (options = {}) => {
 
   return axios({
     method: options.method || defaults.method,
-    baseURL: defaults.url,
+    baseURL: options.uri || defaults.url,
     url: options.uri || defaults.path,
     json: true,
   });
