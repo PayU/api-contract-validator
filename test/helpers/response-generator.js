@@ -14,7 +14,7 @@ module.exports.request = (options = {}) => {
 
   return rp({
     method: options.method || defaults.method,
-    baseUrl: defaults.url,
+    baseUrl: options.url || defaults.url,
     uri: options.uri || options.path || defaults.path,
     resolveWithFullResponse: true,
     simple: options.simple,
