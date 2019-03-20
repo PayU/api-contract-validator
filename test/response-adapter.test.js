@@ -22,7 +22,7 @@ describe('responseAdapter', () => {
   it('request-promise request with query string', async () => {
     const response = await request({
       status: 200,
-      url: 'http://www.google.com/v2/pet/123?querty=value',
+      uri: '/v2/pet/123?querty=value',
       body: responses.body.valid.value,
       headers: responses.headers.valid.value,
     });
@@ -55,7 +55,7 @@ describe('responseAdapter', () => {
   it('axios request with query string', async () => {
     const response = await axios({
       status: 200,
-      url: 'http://www.google.com/v2/pet/123?querty=value',
+      uri: '/v2/pet/123?querty=value',
       body: responses.body.valid.value,
       headers: responses.headers.valid.value,
     });
@@ -89,7 +89,7 @@ describe('responseAdapter', () => {
   it('supertest request with query string', async () => {
     const response = await supertest({
       status: 200,
-      url: 'http://www.google.com/v2/pet/123?querty=value',
+      uri: '/v2/pet/123?querty=value',
       body: responses.body.valid.value,
       headers: responses.headers.valid.value,
     });
