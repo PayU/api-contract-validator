@@ -19,6 +19,26 @@ describe('responseAdapter', () => {
     expect(parseResponse(response)).to.be.like(expectedResponse);
   });
 
+  it('axios response', async () => {
+    const response = await axios({
+      status: 200,
+      body: responses.body.valid.value,
+      headers: responses.headers.valid.value,
+    });
+
+    expect(parseResponse(response)).to.be.like(expectedResponse);
+  });
+
+  it('supertest response', async () => {
+    const response = await supertest({
+      status: 200,
+      body: responses.body.valid.value,
+      headers: responses.headers.valid.value,
+    });
+
+    expect(parseResponse(response)).to.be.like(expectedResponse);
+  });
+
   it('request-promise non-2xx response', async () => {
     try {
       await request({
@@ -29,16 +49,6 @@ describe('responseAdapter', () => {
     } catch (error) {
       expect(parseResponse(error.response)).to.be.like(expected400Response);
     }
-  });
-
-  it('axios response', async () => {
-    const response = await axios({
-      status: 200,
-      body: responses.body.valid.value,
-      headers: responses.headers.valid.value,
-    });
-
-    expect(parseResponse(response)).to.be.like(expectedResponse);
   });
 
   it('axios non-2xx response', async () => {
@@ -53,10 +63,10 @@ describe('responseAdapter', () => {
     }
   });
 
-
-  it('supertest response', async () => {
-    const response = await supertest({
+  it('axios request with query string', async () => {
+    const response = await axios({
       status: 200,
+      uri: '/v2/pet/123?s=value',
       body: responses.body.valid.value,
       headers: responses.headers.valid.value,
     });
@@ -64,7 +74,62 @@ describe('responseAdapter', () => {
     expect(parseResponse(response)).to.be.like(expectedResponse);
   });
 
-  it('general object', async () => {
+  it('request-promise request with query string', async () => {
+    const response = await request({
+      status: 200,
+      uri: '/v2/pet/123?s=value',
+      body: responses.body.valid.value,
+      headers: responses.headers.valid.value,
+    });
+
+    expect(parseResponse(response)).to.be.like(expectedResponse);
+  });
+
+  it('supertest request with query string', async () => {
+    const response = await supertest({
+      status: 200,
+      uri: '/v2/pet/123?s=value',
+      body: responses.body.valid.value,
+      headers: responses.headers.valid.value,
+    });
+
+    expect(parseResponse(response)).to.be.like(expectedResponse);
+  });
+
+  it('request-promise request with extra /', async () => {
+    const response = await request({
+      status: 200,
+      uri: '/v2/pet/123//?s=value',
+      body: responses.body.valid.value,
+      headers: responses.headers.valid.value,
+    });
+
+    expect(parseResponse(response)).to.be.like(expectedResponse);
+  });
+
+  it('axios request with extra /', async () => {
+    const response = await axios({
+      status: 200,
+      uri: '/v2/pet/123/?s=value',
+      body: responses.body.valid.value,
+      headers: responses.headers.valid.value,
+    });
+
+    expect(parseResponse(response)).to.be.like(expectedResponse);
+  });
+
+  it('supertest request with extra /', async () => {
+    const response = await supertest({
+      status: 200,
+      uri: '/v2/pet/123/?s=value',
+      body: responses.body.valid.value,
+      headers: responses.headers.valid.value,
+    });
+
+    expect(parseResponse(response)).to.be.like(expectedResponse);
+  });
+
+  it('simple object', async () => {
     expect(parseResponse({
       method: 'get',
       status: 200,
@@ -81,7 +146,7 @@ describe('responseAdapter', () => {
     })).to.be.like(expectedResponse);
   });
 
-  it('invalid response', async () => {
+  it('invalid object', async () => {
     expect(parseResponse(undefined)).to.to.be.undefined;
     expect(parseResponse(null)).to.to.be.undefined;
   });

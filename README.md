@@ -10,6 +10,11 @@ This is a plugin for validating API response schemas against Swagger/OpenAPI def
 
 Using the plugin is easy. Simply point the plugin to your Swagger 2.0 or OpenAPIv 3.0 file and add one line to your integration test to validate that your application adheres to its design contract. 
 
+## Highlights 
+- Asserts according to API definitions document
+- Descriptive assertion failures
+- Simple and concise usage
+
 ## How does it work?
 The api-contract-validator transforms your API definition into a json-schema based on the provided API documentation file. Then whenever the `matchApiSchema` assertion is called, it automatically extracts the method, path and status code from the response object returned by the API request that you invoked and validates the response object. Both the response headers and body are validated.
 
@@ -19,15 +24,17 @@ The api-contract-validator transforms your API definition into a json-schema bas
 > npm i --save-dev api-contract-validator
 ```
 
-***Chai.js***
+### ***Chai.js***
 ```js
 const matchApiSchema = require('api-contract-validator').chaiPlugin;
 const path = require('path');
 const { expect, use } = require('chai');
 
-const apiDefinitionsPath = path.join(__dirname, 'myApp.yaml'); // API definitions path
+// API definitions path
+const apiDefinitionsPath = path.join(__dirname, 'myApp.yaml'); 
 
-use(matchApiSchema({ apiDefinitionsPath })); // add as chai plugin
+// add as chai plugin
+use(matchApiSchema({ apiDefinitionsPath }));
 
 it('GET /pets/123', async () => {
     const response = await request.get('/pet/123');
@@ -35,18 +42,40 @@ it('GET /pets/123', async () => {
 })
 ```
 
-***Should.js***
+### ***Should.js***
 ```js
 const matchApiSchema = require('api-contract-validator').shouldPlugin;
 
-const apiDefinitionsPath = path.join(__dirname, 'myApp.yaml'); // API definitions path
+// API definitions path
+const apiDefinitionsPath = path.join(__dirname, 'myApp.yaml');
 
-matchApiSchema(should, { apiDefinitionsPath }); // add as should plugin
+// add as should plugin
+matchApiSchema(should, { apiDefinitionsPath });
 
 it('GET /pets/123', async () => {
     const response = await request.get('/pet/123');
     should(response).have.status(200).and.matchApiSchema();
 })
+```
+
+## Descriptive assertion failures
+```js
+AssertionError: expected response to match API schema
++ expected - actual
+
+{
+    "body": {
+-    "age": -1
++    "age": "should be >= 0"
++    "name": "should have required property"
+    }
+    "headers": {
+-    "x-expires-after": []
+-    "x-rate-limit": -5
++    "x-expires-after": "should be string"
++    "x-rate-limit": "should be >= 0"
+    }
+}
 ```
 
 ## Supported request libraries
@@ -62,4 +91,4 @@ it('GET /pets/123', async () => {
 - should.js
 - more to come
 
-The validation function itself is also exposed, allowing this plugin to be assertion-library agnostic.
+<!-- The validation function itself is also exposed, allowing this plugin to be assertion-library agnostic. -->

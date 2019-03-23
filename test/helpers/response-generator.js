@@ -14,7 +14,7 @@ module.exports.request = (options = {}) => {
 
   return rp({
     method: options.method || defaults.method,
-    baseUrl: defaults.url,
+    baseUrl: options.url || defaults.url,
     uri: options.uri || options.path || defaults.path,
     resolveWithFullResponse: true,
     simple: options.simple,
@@ -27,7 +27,7 @@ module.exports.axios = (options = {}) => {
 
   return axios({
     method: options.method || defaults.method,
-    baseURL: defaults.url,
+    baseURL: options.uri || defaults.url,
     url: options.uri || defaults.path,
     json: true,
   });
