@@ -19,6 +19,17 @@ describe('Chai.js plugin schema test', () => {
 
     expect(response).to.matchApiSchema();
   });
+
+  it('Response object matches the schema', async () => {
+    expect({
+      method: 'get',
+      status: 200,
+      path: '/v2/pet/123',
+      body: responses.body.valid.value,
+      headers: responses.headers.valid.value,
+    }).to.matchApiSchema();
+  });
+
   it('Response body does not match the schema', async () => {
     const response = await request({
       status: 200,

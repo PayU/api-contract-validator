@@ -9,7 +9,6 @@ const apiDefinitionsPath = path.join(__dirname, 'data', 'schema.yaml');
 const wrongApiDefinitionsPath = '/not/a/path';
 const invalidApiDefinitionsPath = path.join(__dirname, 'data', 'invalid-schema.yaml');
 
-
 describe('Schema validation', () => {
   it('Response headers and body matches the schema', async () => {
     const response = await request({
