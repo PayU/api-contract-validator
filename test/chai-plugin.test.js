@@ -7,9 +7,9 @@ const responses = require('./data/responses');
 
 const apiDefinitionsPath = path.join(__dirname, 'data', 'schema.yaml');
 
-use(apiSchema.chaiPlugin({ apiDefinitionsPath, reportCoverage: true }));
+use(apiSchema.chaiPlugin({ apiDefinitionsPath }));
 
-describe('Chai.js plugin schema test', () => {
+describe('Chai.js plugin schema', () => {
   it('Response object matches the schema', async () => {
     const response = await request({
       status: 200,
