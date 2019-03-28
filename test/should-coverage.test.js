@@ -28,7 +28,7 @@ describe('Should.js plugin coverage', () => {
 
     // emit exit event in order to trigger the reporting
     process.emit('beforeExit');
-    sinon.assert.callCount(this.spy, 3);
+    sinon.assert.calledThrice(this.spy);
     sinon.assert.calledWith(this.spy.firstCall, chalk.bold('* API definitions coverage report *'));
     sinon.assert.calledWith(this.spy.secondCall, chalk.red('\nUncovered API definitions found'));
     sinon.assert.calledWith(this.spy.thirdCall, `${chalk.cyan.underline.bold('*ROUTE*')}        | ${chalk.green.underline.bold('*METHOD*')}   | ${chalk.yellow.underline.bold('*STATUSES*')} \n/v2/pet        | POST       | 405        \n/v2/pet        | PUT        | 400,404,405\n/v2/pet/:petId | GET        | 200        \n/v2/pet/:petId | POST       | 405        \n/v2/pet/:petId | DELETE     | 404        `);
@@ -39,7 +39,7 @@ describe('Should.js plugin coverage', () => {
 
     // emit exit event in order to trigger the reporting
     process.emit('beforeExit');
-    sinon.assert.callCount(this.spy, 0);
+    sinon.assert.notCalled(this.spy);
   });
 
   it('reportCoverage: false', async () => {
@@ -47,6 +47,6 @@ describe('Should.js plugin coverage', () => {
 
     // emit exit event in order to trigger the reporting
     process.emit('beforeExit');
-    sinon.assert.callCount(this.spy, 0);
+    sinon.assert.notCalled(this.spy);
   });
 });
