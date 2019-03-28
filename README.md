@@ -39,6 +39,16 @@ use(matchApiSchema({ apiDefinitionsPath }));
 it('GET /pets/123', async () => {
     const response = await request.get('/pet/123');
     expect(response).to.have.status(200).and.to.matchApiSchema();
+
+    // alternatively pass
+    const { statusCode, headers, body } = response
+    expect({
+        path: '/pet/123',
+        method: 'get',
+        status: statusCode,
+        body: body,
+        headers: headers,
+    }).to.have.status(200).and.to.matchApiSchema();
 })
 ```
 
@@ -76,6 +86,30 @@ AssertionError: expected response to match API schema
 +    "x-rate-limit": "should be >= 0"
     }
 }
+```
+
+## Coverage report
+By providing in the plugin options, the flag `reportCoverage:true`, the plugin generates a report of all uncovered API definitions.
+```js
+use(matchApiSchema({
+    apiDefinitionsPath,
+    reportCoverage: true
+}));
+```
+
+```bash
+* API definitions coverage report *
+
+Uncovered API definitions found:
+*ROUTE*                    | *METHOD*   | *STATUSES* 
+/v2/pet                    | POST       | 405        
+/v2/pet                    | PUT        | 400,404,405
+/v2/pet/findByStatus       | GET        | 200,400    
+/v2/pet/findByTags         | GET        | 200,400    
+/v2/pet/:petId             | GET        | 400,404    
+/v2/pet/:petId             | POST       | 405        
+/v2/pet/:petId             | DELETE     | 400,404    
+/v2/pet/:petId/uploadImage | POST       | 200         
 ```
 
 ## Supported request libraries

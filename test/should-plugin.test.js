@@ -9,7 +9,7 @@ const apiDefinitionsPath = path.join(__dirname, 'data', 'schema.yaml');
 
 apiSchema.shouldPlugin(should, { apiDefinitionsPath });
 
-describe('Should.js plugin schema test', () => {
+describe('Should.js plugin schema', () => {
   it('Response object matches the schema', async () => {
     const response = await request({
       status: 200,
