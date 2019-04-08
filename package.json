@@ -42,7 +42,7 @@
     "api-schema-builder": "^1.0.7",
     "chalk": "^2.4.2",
     "columnify": "^1.5.4",
-    "js-yaml": "^3.13.0",
+    "js-yaml": "^3.13.1",
     "json-schema-deref-sync": "^0.10.0",
     "lodash": "^4.17.11"
   },
