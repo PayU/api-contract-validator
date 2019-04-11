@@ -39,7 +39,7 @@
   },
   "homepage": "https://github.com/Zooz/api-schema-validator#readme",
   "dependencies": {
-    "api-schema-builder": "^1.0.7",
+    "api-schema-builder": "^1.0.8",
     "chalk": "^2.4.2",
     "columnify": "^1.5.4",
     "js-yaml": "^3.13.1",
