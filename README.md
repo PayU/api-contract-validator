@@ -1,9 +1,10 @@
 [![npm](https://img.shields.io/npm/v/api-contract-validator.svg)](https://www.npmjs.com/package/api-contract-validator)
-[![Build Status](https://travis-ci.org/Zooz/api-contract-validator.svg?branch=master)](https://travis-ci.org/Zooz/api-contract-validator)
-[![Coverage Status](https://coveralls.io/repos/github/Zooz/api-contract-validator/badge.svg?branch=master)](https://coveralls.io/github/Zooz/api-contract-validator?branch=master)
-[![Known Vulnerabilities](https://snyk.io/test/github/Zooz/api-contract-validator/badge.svg?targetFile=package.json)](https://snyk.io/test/github/Zooz/api-contract-validator?targetFile=package.json)
-![style](https://badgen.net/badge/code%20style/airbnb/ff5a5f)
+[![Build Status](https://img.shields.io/travis/Zooz/api-contract-validator.svg)](https://travis-ci.org/Zooz/api-contract-validator)
+[![Coverage Status](https://img.shields.io/coveralls/github/Zooz/api-contract-validator.svg)](https://coveralls.io/github/Zooz/api-contract-validator?branch=master)
+[![Known Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/Zooz/api-contract-validator.svg)](https://snyk.io/test/github/Zooz/api-contract-validator?targetFile=package.json)
+![style](https://img.shields.io/badge/code%20style-airbnb-ff5a5f.svg)
 ![NPM](https://img.shields.io/npm/l/api-contract-validator.svg)
+<!-- [![npm](https://img.shields.io/npm/dm/api-contract-validator.svg)](https://www.npmjs.com/package/api-contract-validator) -->
 
 # api-contract-validator
 This is a plugin for validating API response schemas against Swagger/OpenAPI definition. 
@@ -14,6 +15,7 @@ Using the plugin is easy. Simply point the plugin to your Swagger 2.0 or OpenAPI
 - Asserts according to API definitions document
 - Descriptive assertion failures
 - Simple and concise usage
+- Coverage report
 
 ## How does it work?
 The api-contract-validator transforms your API definition into a json-schema based on the provided API documentation file. Then whenever the `matchApiSchema` assertion is called, it automatically extracts the method, path and status code from the response object returned by the API request that you invoked and validates the response object. Both the response headers and body are validated.
