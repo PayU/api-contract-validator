@@ -39,7 +39,7 @@
   },
   "homepage": "https://github.com/Zooz/api-schema-validator#readme",
   "dependencies": {
-    "api-schema-builder": "^1.0.8",
+    "api-schema-builder": "^1.0.9",
     "chalk": "^2.4.2",
     "columnify": "^1.5.4",
     "js-yaml": "^3.13.1",
@@ -47,23 +47,23 @@
     "lodash": "^4.17.11"
   },
   "devDependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "chai": "^4.2.0",
     "chai-like": "^1.1.1",
     "coveralls": "^3.0.3",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-import": "^2.17.3",
     "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.12.4",
-    "mocha": "^6.0.2",
+    "eslint-plugin-react": "^7.13.0",
+    "mocha": "^6.1.4",
     "nock": "^10.0.6",
-    "nyc": "^13.3.0",
+    "nyc": "^14.1.1",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.7",
     "should": "^13.2.3",
-    "sinon": "^7.3.1",
+    "sinon": "^7.3.2",
     "supertest": "^4.0.2"
   },
   "nyc": {
