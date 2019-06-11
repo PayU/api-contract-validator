@@ -5,7 +5,8 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha",
-    "test:coverage": "nyc npm test",
+    "test:jest": "jest --runInBand --config=jest.config.json",
+    "test:coverage": "nyc npm test && npm run test:jest",
     "lint": "eslint lib",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
@@ -30,7 +31,8 @@
     "validator",
     "rest",
     "restapi",
-    "assert"
+    "assert",
+    "jest"
   ],
   "author": "Kobi Carmeli",
   "license": "Apache-2.0",
@@ -57,6 +59,7 @@
     "eslint-plugin-import": "^2.17.3",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.13.0",
+    "jest": "^24.8.0",
     "mocha": "^6.1.4",
     "nock": "^10.0.6",
     "nyc": "^14.1.1",
@@ -68,6 +71,13 @@
   },
   "nyc": {
     "check-coverage": true,
+    "exclude": [
+      "lib/plugins/jest/**/*",
+      "node_modules",
+      "coverage",
+      ".nyc_output",
+      "test"
+    ],
     "lines": 95,
     "statements": 95,
     "functions": 95,
