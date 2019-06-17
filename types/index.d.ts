@@ -1,5 +1,4 @@
 // TypeScript Version: 3.2
-export {};
 declare global {
     namespace jest {
         interface Matchers<R> {
@@ -18,3 +17,11 @@ declare global {
         }
     }
 }
+
+export function chaiPlugin(options: any): (chai: any) => void;
+export function jestPlugin(options: any): void;
+export function shouldPlugin(options: any): void;
+export const validators: {
+    schemaValidator: (obj: any, options?: any) => any
+    statusValidator: (expectedStatus: any, obj: any) => any
+};
