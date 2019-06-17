@@ -8,6 +8,7 @@
     "test:jest": "jest --runInBand --config=jest.config.json",
     "test:coverage": "nyc npm test && npm run test:jest",
     "lint": "eslint lib",
+    "lint:types": "dtslint types && eslint types/index.d.ts",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
   "repository": {
@@ -42,15 +43,21 @@
   "homepage": "https://github.com/Zooz/api-schema-validator#readme",
   "dependencies": {
     "api-schema-builder": "^1.1.0",
+    "jest-diff": "^24.8.0",
+    "jest-matcher-utils": "^24.8.0",
     "chalk": "^2.4.2",
     "columnify": "^1.5.4",
     "lodash": "^4.17.11"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.15",
+    "@typescript-eslint/eslint-plugin": "^1.10.2",
+    "@typescript-eslint/parser": "^1.10.2",
     "axios": "^0.19.0",
     "chai": "^4.2.0",
     "chai-like": "^1.1.1",
     "coveralls": "^3.0.4",
+    "dtslint": "^0.8.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-airbnb-base": "^13.1.0",
@@ -65,7 +72,8 @@
     "request-promise-native": "^1.0.7",
     "should": "^13.2.3",
     "sinon": "^7.3.2",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "typescript": "^3.5.2"
   },
   "nyc": {
     "check-coverage": true,
