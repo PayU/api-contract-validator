@@ -3,6 +3,7 @@
   "version": "1.1.5",
   "description": "Plugin for validating API schemas from API documentation",
   "main": "lib/index.js",
+  "types": "types/index.d.ts",
   "scripts": {
     "test": "mocha",
     "test:jest": "jest --runInBand --config=jest.config.json",
@@ -16,7 +17,8 @@
     "url": "git+https://github.com/Zooz/api-schema-validator.git"
   },
   "files": [
-    "lib"
+    "lib",
+    "types/index.d.ts"
   ],
   "directories": {
     "lib": "lib",
