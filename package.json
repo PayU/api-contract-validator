@@ -44,7 +44,6 @@
   },
   "homepage": "https://github.com/Zooz/api-schema-validator#readme",
   "dependencies": {
-    "@types/jest": "^24.0.15",
     "api-schema-builder": "^1.1.0",
     "jest-diff": "^24.8.0",
     "jest-matcher-utils": "^24.8.0",
