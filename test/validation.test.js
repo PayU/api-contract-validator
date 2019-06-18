@@ -27,6 +27,25 @@ describe('Schema validation', () => {
     });
   });
 
+  it('Response headers and body matches the schema with custom Content-Type', async () => {
+    const apiDefinitionsPathCustomContentType = path.join(__dirname, 'data', 'schema-custom-content-type.yaml');
+
+    const response = await request({
+      status: 200,
+      body: responses.body.valid.value,
+      headers: responses.headers.valid.value,
+    });
+
+    expect(schemaValidator(response, { apiDefinitionsPath: apiDefinitionsPathCustomContentType, buildSchemaOptions: 'application/hal+json' })).to.be.like({
+      actual: null,
+      errors: null,
+      expected: null,
+      matchMsg: 'expected response to match API schema',
+      noMatchMsg: 'expected response to not match API schema',
+      predicate: true,
+    });
+  });
+
   it('Response body does not match the schema', async () => {
     const response = await request({
       status: 200,

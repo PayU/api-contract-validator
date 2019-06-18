@@ -114,6 +114,18 @@ Uncovered API definitions found:
 /v2/pet/:petId/uploadImage | POST       | 200         
 ```
 
+## Custom Content-Type support
+
+In case you are using non-standard Content-Type for your responses (e. g. when using Hypermedia), you can override Content-Type used by OpenAPI 3.0 validator for resolving response schema:
+
+```js
+use(matchApiSchema({
+    apiDefinitionsPath,
+    buildSchemaOptions: { responseContentType: 'application/hal+json'},
+    reportCoverage: true
+}));
+```
+
 ## Supported request libraries
 - supertest
 - axios
