@@ -1,12 +1,16 @@
 {
-    "extends": "airbnb-base",
-    "env": {
-        "node": true,
-        "jest": true,
-        "mocha": true
-    },
-    "rules": {
-        "no-underscore-dangle": "off",
-        "no-use-before-define": "off"
-    }
+  "extends": "airbnb-base",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "env": {
+    "node": true,
+    "jest": true,
+    "mocha": true
+  },
+  "rules": {
+    "no-underscore-dangle": "off",
+    "no-use-before-define": "off"
+  }
 }
