@@ -1,12 +1,15 @@
 {
   "name": "api-contract-validator",
-  "version": "1.1.5",
+  "version": "1.2.0",
   "description": "Plugin for validating API schemas from API documentation",
   "main": "lib/index.js",
+  "types": "types/index.d.ts",
   "scripts": {
     "test": "mocha",
-    "test:coverage": "nyc npm test",
+    "test:jest": "jest --runInBand --config=jest.config.json",
+    "test:coverage": "nyc npm test && npm run test:jest",
     "lint": "eslint lib",
+    "lint:types": "dtslint types && eslint types/index.d.ts",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
   "repository": {
@@ -14,7 +17,8 @@
     "url": "git+https://github.com/Zooz/api-schema-validator.git"
   },
   "files": [
-    "lib"
+    "lib",
+    "types/index.d.ts"
   ],
   "directories": {
     "lib": "lib",
@@ -30,7 +34,8 @@
     "validator",
     "rest",
     "restapi",
-    "assert"
+    "assert",
+    "jest"
   ],
   "author": "Kobi Carmeli",
   "license": "Apache-2.0",
@@ -40,21 +45,27 @@
   "homepage": "https://github.com/Zooz/api-schema-validator#readme",
   "dependencies": {
     "api-schema-builder": "kibertoad/api-schema-builder#feature/support-custom-content-type",
+    "jest-diff": "^24.8.0",
+    "jest-matcher-utils": "^24.8.0",
     "chalk": "^2.4.2",
     "columnify": "^1.5.4",
     "lodash": "^4.17.11"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^1.10.2",
+    "@typescript-eslint/parser": "^1.10.2",
     "axios": "^0.19.0",
     "chai": "^4.2.0",
     "chai-like": "^1.1.1",
     "coveralls": "^3.0.4",
+    "dtslint": "^0.8.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.17.3",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.13.0",
+    "jest": "^24.8.0",
     "mocha": "^6.1.4",
     "nock": "^10.0.6",
     "nyc": "^14.1.1",
@@ -62,10 +73,18 @@
     "request-promise-native": "^1.0.7",
     "should": "^13.2.3",
     "sinon": "^7.3.2",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "typescript": "^3.5.2"
   },
   "nyc": {
     "check-coverage": true,
+    "exclude": [
+      "lib/plugins/jest/**/*",
+      "node_modules",
+      "coverage",
+      ".nyc_output",
+      "test"
+    ],
     "lines": 95,
     "statements": 95,
     "functions": 95,

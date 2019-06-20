@@ -70,6 +70,23 @@ it('GET /pets/123', async () => {
 })
 ```
 
+### ***Jest***
+```js
+const matchApiSchema = require('api-contract-validator').jestPlugin;
+
+// API definitions path
+const apiDefinitionsPath = path.join(__dirname, 'myApp.yaml');
+
+// add as jest plugin
+matchApiSchema({ apiDefinitionsPath });
+
+it('GET /pets/123', async () => {
+    const response = await request.get('/pet/123');
+    expect(response).toHaveStatus(200);
+    expect(response).toMatchApiSchema();
+})
+```
+
 ## Descriptive assertion failures
 ```js
 AssertionError: expected response to match API schema
@@ -137,6 +154,7 @@ use(matchApiSchema({
 ## Supported assertion libraries
 - chai.js
 - should.js
+- jest
 - more to come
 
 <!-- The validation function itself is also exposed, allowing this plugin to be assertion-library agnostic. -->

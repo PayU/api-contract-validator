@@ -1,0 +1,17 @@
+{
+  "moduleFileExtensions": [
+    "js",
+    "json"
+  ],
+  "testMatch": [
+    "<rootDir>/test/jest/*.test.js"
+  ],
+  "testEnvironment": "node",
+  "reporters": [
+    "default"
+  ],
+  "coveragePathIgnorePatterns": [
+    "<rootDir>/node_modules/",
+    "<rootDir>/coverage/"
+  ]
+}
