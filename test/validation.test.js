@@ -33,16 +33,48 @@ describe('Schema validation', () => {
     const response = await request({
       status: 200,
       body: responses.body.valid.value,
-      headers: responses.headers.valid.value,
+      headers: {
+        ...responses.headers.valid.value,
+        'Content-Type': 'application/hal+json',
+      },
     });
 
-    expect(schemaValidator(response, { apiDefinitionsPath: apiDefinitionsPathCustomContentType, buildSchemaOptions: 'application/hal+json' })).to.be.like({
+    expect(schemaValidator(
+      response,
+      { apiDefinitionsPath: apiDefinitionsPathCustomContentType },
+    )).to.be.like({
       actual: null,
       errors: null,
       expected: null,
       matchMsg: 'expected response to match API schema',
       noMatchMsg: 'expected response to not match API schema',
       predicate: true,
+    });
+  });
+
+  it('Correctly returns error for undefined response', async () => {
+    const apiDefinitionsPathCustomContentType = path.join(__dirname, 'data', 'schema-custom-content-type.yaml');
+
+    const response = await request({
+      status: 200,
+      body: responses.body.valid.value,
+      headers: responses.headers.valid.value,
+    });
+
+    expect(schemaValidator(
+      response,
+      { apiDefinitionsPath: apiDefinitionsPathCustomContentType },
+    )).to.be.like({
+      actual: {},
+      errors: [
+        {
+          message: 'No schema defined for response content-type "application/json"',
+        },
+      ],
+      expected: {},
+      matchMsg: 'expected response to match API schema',
+      noMatchMsg: 'expected response to not match API schema',
+      predicate: false,
     });
   });
 

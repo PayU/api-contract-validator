@@ -44,7 +44,7 @@
   },
   "homepage": "https://github.com/Zooz/api-schema-validator#readme",
   "dependencies": {
-    "api-schema-builder": "kibertoad/api-schema-builder#feature/support-custom-content-type",
+    "api-schema-builder": "^1.1.2",
     "jest-diff": "^24.8.0",
     "jest-matcher-utils": "^24.8.0",
     "chalk": "^2.4.2",
