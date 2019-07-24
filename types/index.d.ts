@@ -54,7 +54,7 @@ declare global {
 
 export function chaiPlugin(options: ValidatorOptions): (chai: any) => void;
 export function jestPlugin(options: ValidatorOptions): void;
-export function shouldPlugin(options: ValidatorOptions): void;
+export function shouldPlugin(should: Function, options: ValidatorOptions): void;
 export const validators: {
     schemaValidator: (obj: any, options?: ValidatorOptions) => SchemaValidationResult;
     statusValidator: (expectedStatus: number, obj: any) => StatusValidationResult;
