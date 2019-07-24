@@ -1,4 +1,5 @@
-const { expect } = require('chai');
+const { expect, use } = require('chai');
+const chaiLike = require('chai-like');
 const path = require('path');
 
 const { schemaValidator, statusValidator } = require('../lib/index').validators;
@@ -8,6 +9,8 @@ const responses = require('./data/responses');
 const apiDefinitionsPath = path.join(__dirname, 'data', 'schema.yaml');
 const wrongApiDefinitionsPath = '/not/a/path';
 const invalidApiDefinitionsPath = path.join(__dirname, 'data', 'invalid-schema.yaml');
+
+use(chaiLike);
 
 describe('Schema validation', () => {
   it('Response headers and body matches the schema', async () => {
@@ -42,6 +45,30 @@ describe('Schema validation', () => {
     expect(schemaValidator(
       response,
       { apiDefinitionsPath: apiDefinitionsPathCustomContentType },
+    )).to.be.like({
+      actual: null,
+      errors: null,
+      expected: null,
+      matchMsg: 'expected response to match API schema',
+      noMatchMsg: 'expected response to not match API schema',
+      predicate: true,
+    });
+  });
+
+  it('Response headers and body matches the schema when charset is specified', async () => {
+    const apiDefinitionsPathJsonContentType = path.join(__dirname, 'data', 'schema-json-content-type.yaml');
+    const response = await request({
+      status: 200,
+      body: responses.body.valid.value,
+      headers: {
+        ...responses.headers.valid.value,
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+    });
+
+    expect(schemaValidator(
+      response,
+      { apiDefinitionsPath: apiDefinitionsPathJsonContentType },
     )).to.be.like({
       actual: null,
       errors: null,
