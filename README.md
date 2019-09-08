@@ -7,15 +7,16 @@
 <!-- [![npm](https://img.shields.io/npm/dm/api-contract-validator.svg)](https://www.npmjs.com/package/api-contract-validator) -->
 
 # api-contract-validator
-This is a plugin for validating API response schemas against Swagger/OpenAPI definition. 
+This plugin for assertion libraries is for validating API response schemas against Swagger/OpenAPI definition. 
 
-Using the plugin is easy. Simply point the plugin to your Swagger 2.0 or OpenAPIv 3.0 file and add one line to your integration test to validate that your application adheres to its design contract. 
+Using the plugin is easy. Simply point the plugin to your API definitions file path and add one line to your integration test to validate that your application adheres to its design contract. 
 
 ## Highlights 
 - Asserts according to API definitions document
 - Descriptive assertion failures
 - Simple and concise usage
 - Coverage report
+- Supports OpenAPI 3.0
 
 ## How does it work?
 The api-contract-validator transforms your API definition into a json-schema based on the provided API documentation file. Then whenever the `matchApiSchema` assertion is called, it automatically extracts the method, path and status code from the response object returned by the API request that you invoked and validates the response object. Both the response headers and body are validated.
