@@ -26,6 +26,7 @@
   },
   "keywords": [
     "chai",
+    "chai-plugin",
     "should",
     "plugin",
     "api",
@@ -35,6 +36,7 @@
     "rest",
     "restapi",
     "assert",
+    "assertion",
     "jest"
   ],
   "author": "Kobi Carmeli",
