@@ -1,5 +1,5 @@
 [![npm](https://img.shields.io/npm/v/api-contract-validator.svg)](https://www.npmjs.com/package/api-contract-validator)
-[![Build Status](https://img.shields.io/travis/Zooz/api-contract-validator.svg)](https://travis-ci.org/Zooz/api-contract-validator)
+[![Build Status](https://travis-ci.com/PayU/api-contract-validator.svg?branch=master)](https://travis-ci.com/PayU/api-contract-validator)
 [![Coverage Status](https://img.shields.io/coveralls/github/Zooz/api-contract-validator.svg)](https://coveralls.io/github/Zooz/api-contract-validator?branch=master)
 [![Known Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/Zooz/api-contract-validator.svg)](https://snyk.io/test/github/Zooz/api-contract-validator?targetFile=package.json)
 ![style](https://img.shields.io/badge/code%20style-airbnb-ff5a5f.svg)
