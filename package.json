@@ -42,9 +42,9 @@
   "author": "Kobi Carmeli",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/PayU/api-schema-validator/issues"
+    "url": "https://github.com/PayU/api-contract-validator/issues"
   },
-  "homepage": "https://github.com/PayU/api-schema-validator#readme",
+  "homepage": "https://github.com/PayU/api-contract-validator#readme",
   "dependencies": {
     "api-schema-builder": "^1.2.0",
     "chalk": "^2.4.2",
