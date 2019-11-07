@@ -63,7 +63,7 @@ export const validators: {
 export interface ValidatorOptions {
     apiDefinitionsPath: string;
     reportCoverage?: boolean;
-    printCoverageToFile?: boolean;
+    exportCoverage?: boolean;
 }
 
 export interface SchemaValidationResult {
