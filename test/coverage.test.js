@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 const { expect } = require('chai');
 
 const coverage = require('../lib/helpers/coverage');
@@ -52,6 +53,7 @@ describe('coverage getReport', () => {
 describe('coverage printReport', () => {
   afterEach(() => {
     process.removeAllListeners('beforeExit');
+    fs.de
   });
 
   it('no covered definitions', () => {
@@ -60,6 +62,14 @@ describe('coverage printReport', () => {
     coverage.init({ apiDefinitionsPath, reportCoverage: true });
     const coverageReport = coverage.getReport();
     expect(coverageTable(coverageReport)).to.eql(expected);
+  });
+  it('no covered definitions with export', () => {
+    const expected = '[{"route":"/v2/pet","method":"POST","statuses":"405"},{"route":"/v2/pet","method":"PUT","statuses":"400,404,405"},{"route":"/v2/pet/:petId","method":"GET","statuses":"200"},{"route":"/v2/pet/:petId","method":"POST","statuses":"405"},{"route":"/v2/pet/:petId","method":"DELETE","statuses":"404"}]';
+
+    coverage.init({ apiDefinitionsPath, reportCoverage: true,exportCoverage: true });
+    process.emit('beforeExit');
+    const exportedReport = fs.readFileSync('./coverage.json').toString();
+    expect(exportedReport).to.eql(expected);
   });
 
   it('full coverage', () => {
@@ -76,5 +86,21 @@ describe('coverage printReport', () => {
 
     const coverageReport = coverage.getReport();
     expect(coverageTable(coverageReport)).to.eql(expected);
+  });
+  it('full coverage and with export', () => {
+    const expected = '[]';
+
+    coverage.init({ apiDefinitionsPath, reportCoverage: true, exportCoverage: true });
+    coverage.setCoverage({ path: '/v2/pet', method: 'post', status: 405 });
+    coverage.setCoverage({ path: '/v2/pet', method: 'put', status: 400 });
+    coverage.setCoverage({ path: '/v2/pet', method: 'put', status: 404 });
+    coverage.setCoverage({ path: '/v2/pet', method: 'put', status: 405 });
+    coverage.setCoverage({ path: '/v2/pet/123', method: 'get', status: 200 });
+    coverage.setCoverage({ path: '/v2/pet/123', method: 'post', status: 405 });
+    coverage.setCoverage({ path: '/v2/pet/123', method: 'delete', status: 404 });
+
+    process.emit('beforeExit');
+    const exportedReport = fs.readFileSync('./coverage.json').toString();
+    expect(exportedReport).to.eql(expected);
   });
 });
