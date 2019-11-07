@@ -134,11 +134,10 @@ Uncovered API definitions found:
 ```
 
 # Exporting the report: 
-When providing `reportCoverage:true`, `exportCoverage: true` a `coverage.json` file will be created in your cwd with following structure: 
+When providing `exportCoverage: true` a `coverage.json` file will be created in your cwd with following structure: 
 ```js
 use(matchApiSchema({
     apiDefinitionsPath,
-    reportCoverage: true,
     exportCoverage: true
 }));
 ```
