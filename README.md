@@ -119,7 +119,7 @@ use(matchApiSchema({
 ```
 
 ```bash
-* API definitions coverage report *
+* API definitions coverage report *JJ
 
 Uncovered API definitions found:
 *ROUTE*                    | *METHOD*   | *STATUSES* 
