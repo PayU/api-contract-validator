@@ -16,7 +16,7 @@ Using the plugin is easy. Simply point the plugin to your API definitions file p
 - Asserts according to API definitions document
 - Descriptive assertion failures
 - Simple and concise usage
-- Coverage report
+- Coverage report (can be printed to your terminal or exported to a json file)
 - Supports OpenAPI 3.0
 
 ## How does it work?
@@ -133,6 +133,22 @@ Uncovered API definitions found:
 /v2/pet/:petId/uploadImage | POST       | 200         
 ```
 
+# Exporting the report: 
+When providing `exportCoverage: true` a `coverage.json` file will be created in your cwd with following structure: 
+```js
+use(matchApiSchema({
+    apiDefinitionsPath,
+    exportCoverage: true
+}));
+```
+coverage.json:
+```js
+[{"route":"/v2/pet","method":"POST","statuses":"405"},
+{"route":"/v2/pet","method":"PUT","statuses":"400,404,405"},
+{"route":"/v2/pet/:petId","method":"GET","statuses":"200"},
+{"route":"/v2/pet/:petId","method":"POST","statuses":"405"},
+{"route":"/v2/pet/:petId","method":"DELETE","statuses":"404"}]
+```
 ## Supported request libraries
 - supertest
 - axios
