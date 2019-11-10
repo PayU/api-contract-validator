@@ -1,6 +1,6 @@
 {
   "name": "api-contract-validator",
-  "version": "1.2.10",
+  "version": "1.2.11",
   "description": "Plugin for validating API schemas from API documentation",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
