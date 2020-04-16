@@ -1,21 +1,21 @@
-const validBody = {
+const validBody = Object.freeze({
   value: {
     description: 'Usually found in South-America',
     name: 'Llama',
     age: 4,
   },
-};
+});
 
-const validHeaders = {
+const validHeaders = Object.freeze({
   value: {
     'x-expires-after': '2019-03-13T10:07:38.376Z',
-    'x-rate-limit': 5,
-    'x-elapsed-time': 130,
+    'x-rate-limit': '5',
+    'x-elapsed-time': '130',
     'x-request-id': '12345',
   },
-};
+});
 
-const invalidBody = {
+const invalidBody = Object.freeze({
   value: {
     description: 'Oops',
     age: -1,
@@ -56,23 +56,23 @@ const invalidBody = {
       name: 'should have required property',
     },
   },
-};
+});
 
-const invalidHeaders = {
+const invalidHeaders = Object.freeze({
   value: {
-    'x-expires-after': [],
+    'x-expires-after': 'abc',
     'x-rate-limit': -5,
     'x-request-id': '123',
   },
   actual: {
     headers: {
-      'x-expires-after': [],
+      'x-expires-after': 'abc',
       'x-rate-limit': -5,
     },
   },
   expected: {
     headers: {
-      'x-expires-after': 'should be string',
+      'x-expires-after': 'should match format "date-time"',
       'x-rate-limit': 'should be >= 0',
     },
   },
@@ -90,15 +90,15 @@ const invalidHeaders = {
     },
     {
       dataPath: ".headers['x-expires-after']",
-      keyword: 'type',
-      message: 'should be string',
+      keyword: 'format',
+      message: 'should match format "date-time"',
       params: {
-        type: 'string',
+        format: 'date-time',
       },
-      schemaPath: '#/headers/properties/x-expires-after/type',
+      schemaPath: '#/headers/properties/x-expires-after/format',
     },
   ],
-};
+});
 
 module.exports = Object.freeze({
   body: {

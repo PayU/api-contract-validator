@@ -152,7 +152,7 @@ describe('responseAdapter', () => {
   });
 });
 
-const expectedResponse = {
+const expectedResponse = Object.freeze({
   request: {
     method: 'get',
     path: '/v2/pet/123',
@@ -162,9 +162,9 @@ const expectedResponse = {
     body: responses.body.valid.value,
     headers: responses.headers.valid.value,
   },
-};
+});
 
-const expected400Response = {
+const expected400Response = Object.freeze({
   request: {
     method: 'get',
     path: '/v2/pet/123',
@@ -173,4 +173,4 @@ const expected400Response = {
     status: 400,
     body: responses.body.valid.value,
   },
-};
+});

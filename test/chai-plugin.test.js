@@ -13,8 +13,8 @@ describe('Chai.js plugin schema', () => {
   it('Response object matches the schema', async () => {
     const response = await request({
       status: 200,
-      body: responses.body.valid.value,
-      headers: responses.headers.valid.value,
+      body: { ...responses.body.valid.value },
+      headers: { ...responses.headers.valid.value },
     });
 
     expect(response).to.matchApiSchema();
@@ -25,16 +25,16 @@ describe('Chai.js plugin schema', () => {
       method: 'get',
       status: 200,
       path: '/v2/pet/123',
-      body: responses.body.valid.value,
-      headers: responses.headers.valid.value,
+      body: { ...responses.body.valid.value },
+      headers: { ...responses.headers.valid.value },
     }).to.matchApiSchema();
   });
 
   it('Response body does not match the schema', async () => {
     const response = await request({
       status: 200,
-      body: responses.body.invalid.value,
-      headers: responses.headers.valid.value,
+      body: { ...responses.body.invalid.value },
+      headers: { ...responses.headers.valid.value },
     });
 
     expect(response).to.not.matchApiSchema();
