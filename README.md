@@ -2,7 +2,7 @@
 [![npm](https://img.shields.io/npm/dm/api-contract-validator)](https://www.npmjs.com/package/api-contract-validator)
 [![Build Status](https://travis-ci.com/PayU/api-contract-validator.svg?branch=master)](https://travis-ci.com/PayU/api-contract-validator)
 [![Coverage Status](https://coveralls.io/repos/github/PayU/api-contract-validator/badge.svg?branch=master)](https://coveralls.io/github/PayU/api-contract-validator?branch=master)
-[![Known Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/Zooz/api-contract-validator.svg)](https://snyk.io/test/github/Zooz/api-contract-validator?targetFile=package.json)
+[![Known Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/PayU/api-contract-validator.svg)](https://snyk.io/test/github/PayU/api-contract-validator?targetFile=package.json)
 ![style](https://img.shields.io/badge/code%20style-airbnb-ff5a5f.svg)
 ![NPM](https://img.shields.io/npm/l/api-contract-validator.svg)
 <!-- [![npm](https://img.shields.io/npm/dm/api-contract-validator.svg)](https://www.npmjs.com/package/api-contract-validator) -->

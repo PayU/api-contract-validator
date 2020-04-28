@@ -1,5 +1,6 @@
 // TypeScript Version: 3.2
 declare global {
+    // eslint-disable-next-line no-redeclare
     namespace jest {
         interface Matchers<R> {
             toMatchApiSchema: () => void;
