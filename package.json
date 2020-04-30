@@ -10,7 +10,9 @@
     "test:coverage": "nyc npm test && npm run test:jest",
     "lint": "eslint lib",
     "lint:types": "dtslint types && eslint types/index.d.ts",
-    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -51,7 +53,8 @@
     "columnify": "^1.5.4",
     "jest-diff": "^25.3.0",
     "jest-matcher-utils": "^25.3.0",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.28.0",
@@ -97,5 +100,6 @@
     ],
     "cache": true,
     "all": true
-  }
+  },
+  "snyk": true
 }
