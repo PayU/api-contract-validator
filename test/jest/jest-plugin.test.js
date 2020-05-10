@@ -8,7 +8,7 @@ const apiDefinitionsPath = path.join(__dirname, '..', 'data', 'schema.yaml');
 apiSchema.jestPlugin({ apiDefinitionsPath });
 
 describe('Jest plugin schema', () => {
-  it('Response object matches the schema', async () => {
+  it('Response object matches the schema (response)', async () => {
     const response = await request({
       status: 200,
       body: responses.body.valid.value,
@@ -19,7 +19,7 @@ describe('Jest plugin schema', () => {
       .toMatchApiSchema();
   });
 
-  it('Response object matches the schema', async () => {
+  it('Response object matches the schema (direct value)', async () => {
     expect({
       method: 'get',
       status: 200,
