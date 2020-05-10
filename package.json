@@ -52,6 +52,7 @@
     "jest-diff": "^25.5.0",
     "jest-matcher-utils": "^25.5.0",
     "lodash.get": "^4.4.2",
+    "lodash.flatten": "^4.4.0",
     "lodash.set": "^4.3.2"
   },
   "devDependencies": {
