@@ -64,7 +64,7 @@
     "chai": "^4.2.0",
     "chai-like": "^1.1.1",
     "coveralls": "^3.0.14",
-    "dtslint": "^3.5.1",
+    "dtslint": "^3.5.2",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-airbnb-base": "^14.1.0",
