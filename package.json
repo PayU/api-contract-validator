@@ -9,6 +9,7 @@
     "test:jest": "jest --runInBand --config=jest.config.json",
     "test:coverage": "nyc npm test && npm run test:jest",
     "lint": "eslint lib",
+    "lint:fix": "eslint --fix lib",
     "lint:types": "dtslint types && eslint types/index.d.ts",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
@@ -53,7 +54,8 @@
     "jest-matcher-utils": "^25.5.0",
     "lodash.get": "^4.4.2",
     "lodash.flatten": "^4.4.0",
-    "lodash.set": "^4.3.2"
+    "lodash.set": "^4.3.2",
+    "uri-js": "^4.2.2"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.30.0",
@@ -62,14 +64,15 @@
     "chai": "^4.2.0",
     "chai-like": "^1.1.1",
     "coveralls": "^3.0.14",
-    "dtslint": "^3.5.1",
+    "dtslint": "^3.5.2",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
-    "jest": "^25.5.3",
+    "fastify": "^3.0.0-rc.2",
+    "jest": "^25.5.4",
     "mocha": "^7.1.2",
     "nock": "^12.0.3",
     "nyc": "^15.0.1",

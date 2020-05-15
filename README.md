@@ -17,6 +17,7 @@ Using the plugin is easy. Simply point the plugin to your API definitions file p
 - Descriptive assertion failures
 - Simple and concise usage
 - Coverage report (can be printed to your terminal or exported to a json file)
+- Supports response format from `axios`, `superagent`, `supertest`, `request` and `light-my-request` (used by `fastify`)
 - Supports OpenAPI 3.0
 
 ## How does it work?
