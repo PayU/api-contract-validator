@@ -1,5 +1,7 @@
 # Master
 
+# 2.1.0 - 15 May, 2020
+
 ### New features
 
 - Support response format from fastify inject() #44
