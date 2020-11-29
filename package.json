@@ -50,13 +50,13 @@
   },
   "homepage": "https://github.com/PayU/api-contract-validator#readme",
   "dependencies": {
-    "api-schema-builder": "^2.0.0",
+    "api-schema-builder": "^2.0.4",
     "chalk": "^3.0.0",
     "columnify": "^1.5.4",
     "jest-diff": "^25.5.0",
     "jest-matcher-utils": "^25.5.0",
-    "lodash.get": "^4.4.2",
     "lodash.flatten": "^4.4.0",
+    "lodash.get": "^4.4.2",
     "lodash.set": "^4.3.2",
     "uri-js": "^4.2.2"
   },
