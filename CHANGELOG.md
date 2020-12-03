@@ -1,5 +1,12 @@
 # Master
 
+# 2.2.0 - 3 December, 2020
+
+### New features
+
+- Support multiple yaml documents #52
+- Support using nullable
+
 # 2.1.0 - 15 May, 2020
 
 ### New features
