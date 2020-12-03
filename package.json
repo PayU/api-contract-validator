@@ -6,8 +6,9 @@
   "types": "types/index.d.ts",
   "scripts": {
     "test": "mocha",
-    "test:jest": "jest --runInBand --config=jest.config.json",
+    "test:ci": "npm run lint && npm run lint:types && npm run test:coverage && npm run coveralls",
     "test:coverage": "nyc npm test && npm run test:jest",
+    "test:jest": "jest --runInBand --config=jest.config.json",
     "lint": "eslint lib",
     "lint:fix": "eslint --fix lib",
     "lint:types": "dtslint types && eslint types/index.d.ts",
@@ -50,7 +51,7 @@
   },
   "homepage": "https://github.com/PayU/api-contract-validator#readme",
   "dependencies": {
-    "api-schema-builder": "^2.0.0",
+    "api-schema-builder": "^2.0.3",
     "chalk": "^3.0.0",
     "columnify": "^1.5.4",
     "jest-diff": "^25.5.0",
@@ -58,7 +59,7 @@
     "lodash.get": "^4.4.2",
     "lodash.flatten": "^4.4.0",
     "lodash.set": "^4.3.2",
-    "uri-js": "^4.2.2"
+    "uri-js": "^4.4.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.30.0",
@@ -67,16 +68,16 @@
     "chai": "^4.2.0",
     "chai-like": "^1.1.1",
     "coveralls": "^3.0.14",
-    "dtslint": "^3.5.2",
+    "dtslint": "3.5.2",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
-    "fastify": "^3.0.0-rc.2",
+    "fastify": "^3.8.0",
     "jest": "^25.5.4",
-    "mocha": "^7.1.2",
+    "mocha": "^7.2.0",
     "nock": "^12.0.3",
     "nyc": "^15.0.1",
     "request": "^2.88.2",
@@ -84,7 +85,7 @@
     "should": "^13.2.3",
     "sinon": "^9.0.2",
     "supertest": "^4.0.2",
-    "typescript": "^3.8.3"
+    "typescript": "3.8.3"
   },
   "nyc": {
     "check-coverage": true,
