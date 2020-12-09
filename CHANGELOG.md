@@ -1,5 +1,8 @@
 # Master
 
+# 2.2.1 - 9 December, 2020
+ - Update types to reflect the support of multiple definitions files paths
+
 # 2.2.0 - 3 December, 2020
 
 ### New features
