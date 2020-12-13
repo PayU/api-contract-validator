@@ -1,5 +1,8 @@
 # Master
 
+# 2.2.2 - 13 December, 2020
+ - update "api-schema-builder" package to latest 
+
 # 2.2.1 - 9 December, 2020
  - Update types to reflect the support of multiple definitions files paths
 
