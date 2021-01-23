@@ -64,7 +64,7 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "chai": "^4.2.0",
     "chai-like": "^1.1.1",
     "coveralls": "^3.0.14",
