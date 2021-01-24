@@ -1,5 +1,14 @@
 module.exports = [
   {
+    dataPath: '.body',
+    keyword: 'additionalProperties',
+    message: 'should NOT have additional properties',
+    params: {
+      additionalProperty: 'manor',
+    },
+    schemaPath: '#/body/additionalProperties',
+  },
+  {
     dataPath: ".headers['x-request-id']",
     keyword: 'minLength',
     message: 'should NOT be shorter than 4 characters',

@@ -41,6 +41,7 @@ describe('ajv error parsing', () => {
             food: 'should NOT be shorter than 4 characters',
             location: 'should have required property',
           },
+          manor: 'should NOT have additional properties',
         },
         headers: {
           'x-elapsed-time': 'should have required property',
