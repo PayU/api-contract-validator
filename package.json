@@ -49,7 +49,7 @@
   "bugs": {
     "url": "https://github.com/PayU/api-contract-validator/issues"
   },
-  "homepage": "https://github.com/PayU/api-contract-validator#readme",
+  "homepage": "git+https://github.com/PayU/api-contract-validator#readme",
   "dependencies": {
     "api-schema-builder": "^2.0.5",
     "chalk": "^3.0.0",
