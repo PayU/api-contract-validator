@@ -46,6 +46,17 @@ jobs:
 
   release:
     name: release
+    permissions:
+      actions: write
+      checks: write
+      contents: write
+      deployments: write
+      issues: write
+      packages: write
+      pull-requests: write
+      repository-projects: write
+      security-events: write
+      statuses: write
     needs: [ test, lockfile-lint ]
     runs-on: 'ubuntu-latest'
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
