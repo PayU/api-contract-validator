@@ -51,7 +51,7 @@
   },
   "homepage": "git+https://github.com/PayU/api-contract-validator#readme",
   "dependencies": {
-    "api-schema-builder": "^2.0.9",
+    "api-schema-builder": "^2.0.10",
     "chalk": "^3.0.0",
     "columnify": "^1.5.4",
     "jest-diff": "^25.5.0",
